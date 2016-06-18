@@ -1,0 +1,36 @@
+//type: db_type
+{
+  "pritives":[
+    "string",
+    "number",
+    "int"
+    "text",
+    "html",
+    "datetime",
+    "date",
+    "time",
+    "email",
+    "url"
+  ],
+  "image": {
+    "url": "string",
+    "thumbnail": "string",
+    "alt": "string",
+    "caption": "string",
+    "width": "number",
+    "height": "number",
+    "srcset":[{
+      "dimension":"string",
+      "url":"string"
+    }]
+  },
+  "link": {
+    "name": "string",
+    "url": "string"
+  },
+  "latlong": {
+    "lat": "number",
+    "long": "number"
+  }
+  "color": "string"
+}
