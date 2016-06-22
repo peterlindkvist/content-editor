@@ -16,16 +16,11 @@ function contentRefresh(parameter){
 }
 
 export function update(parameter) {
-  console.log('refresh A');
   return (dispatch, getState) => {
-    console.log('refresh B');
-
     dispatch(contentRefresh(parameter));
-    console.log('refresh C');
     return fetch('data/content.json').
       then(response => response.json()).
       then(json => {
-        console.log('refresh D', json);
         dispatch(contentUpdated(json));
       });
   }

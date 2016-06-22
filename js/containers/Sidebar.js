@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as ContentActions from '../actions/ContentActions';
 import styles from '../../css/app.css';
 import _ from 'lodash';
+import {Drawer, Navigation} from 'react-mdl';
 
 class Sidebar extends Component {
   componentDidMount(){
@@ -28,29 +29,38 @@ class Sidebar extends Component {
   }
 
 
+  /*{(_.isArray(value) &&
+    <ul>
+      {value.map(obj =>
+        <li>{obj.title || obj.name}</li>
+      )}
+    </ul>
+  )}*/
+
 
   render() {
-    const {title, dispatch} = this.props;
-    console.log("props", this.props);
+    const {title, dispatch, data} = this.props;
+    console.log("props", _.map(data, (value, key) => {return key}));
 
     return (
-      <nav>
-        <ul>
-        { _.map(this.props.data, (value, key) =>
-          <li>
-            <button>{key}</button>
-            {(_.isArray(value) &&
-              <ul>
-                {value.map(obj =>
-                  <li>{obj.title || obj.name}</li>
-                )}
-              </ul>
-            )}
-
-          </li>
-        )}
-        </ul>
-      </nav>
+      <Drawer title="Title">
+        <Navigation>
+          <ul>
+          { _.map(data, (value, key) =>
+            <li>
+              <a key={key} href="">{key}</a>
+              {(_.isArray(value) &&
+                <ul>
+                  {value.map(obj =>
+                    <li>{obj.title || obj.name}</li>
+                  )}
+                </ul>
+              )}
+            </li>
+          )}
+          </ul>
+        </Navigation>
+      </Drawer>
     );
   }
 }
