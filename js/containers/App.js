@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import configureStore from '../store/configureStore';
 import Home from '../components/Home';
 import Sidebar from '../containers/Sidebar';
-import {renderDevTools} from '../utils/devTools';
+import DevTools from './DevTools';
 import * as ContentActions from '../actions/ContentActions';
 import {Layout, Header} from 'react-mdl';
 
@@ -22,12 +22,12 @@ export default React.createClass({
               <Sidebar />
               <Home />
             </Layout>
+            {(__DEV__ &&
+                <DevTools />
+            )}
           </div>
         </Provider>
 
-        {/* only renders when running in DEV mode */
-          renderDevTools(store)
-        }
       </div>
     );
   }

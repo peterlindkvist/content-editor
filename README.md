@@ -1,7 +1,7 @@
 
-# content-editor (content-editor)
+# content-editor
 
-> A client side editor for normalized json data
+A client side editor for normalized json data
 
 ## Running your project
 
