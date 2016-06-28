@@ -1,7 +1,7 @@
 import * as ActionTypes from '../constants/ActionTypes';
 
 let defaultState = {
-
+  path: 'post[0]'
 };
 
 export default function(state = defaultState, action) {

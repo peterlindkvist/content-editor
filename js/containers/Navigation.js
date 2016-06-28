@@ -6,6 +6,7 @@ import * as AppActions from '../actions/AppActions';
 import styles from '../../css/app.css';
 import _ from 'lodash';
 import mui, {AppBar, Drawer, MenuItem} from 'material-ui';
+import * as EditorUtils from '../utils/EditorUtils';
 
 class Navigation extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class Navigation extends Component {
                 <MenuItem>
                   { _.map(obj, (child, i) =>
                     <MenuItem key={(key + i)} onTouchTap={this._handleOpen(false)}>
-                      {(child.name || child.title)}
+                      {EditorUtils.getTitle(child)}
                     </MenuItem>
                   )}
                 </MenuItem>

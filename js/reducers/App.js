@@ -1,7 +1,7 @@
 import * as ActionTypes from '../constants/ActionTypes';
 
 let defaultState = {
-  drawer_open : true
+  drawer_open : false
 };
 
 export default function(state = defaultState, action) {

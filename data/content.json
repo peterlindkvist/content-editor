@@ -3,7 +3,19 @@
     "page_title": "string"
   },
   "post": [{
-    "title": "string",
+    "title": "post 1",
+    "author": "user",
+    "pub_date": "datetime",
+    "mod_date": "datetime",
+    "content": "html",
+    "excerpt": "text",
+    "status": "status",
+    "parent": "post",
+    "comments": ["comment"],
+    "tags": ["tag"],
+    "status": "_status"
+  }, {
+    "title": "post 2",
     "author": "user",
     "pub_date": "datetime",
     "mod_date": "datetime",
