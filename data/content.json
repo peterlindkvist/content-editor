@@ -7,7 +7,7 @@
     "author": "user",
     "pub_date": "datetime",
     "mod_date": "datetime",
-    "content": "html",
+    "content": "This is a long \n multiline text",
     "excerpt": "text",
     "status": "status",
     "parent": "post",

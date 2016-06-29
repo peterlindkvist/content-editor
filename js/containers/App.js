@@ -6,7 +6,7 @@ import Navigation from '../containers/Navigation';
 import DevTools from './DevTools';
 import * as ContentActions from '../actions/ContentActions';
 import mui from 'material-ui';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
@@ -16,8 +16,9 @@ const store = configureStore();
 export default React.createClass({
   render() {
     return (
-      <Provider store={store}>
-        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <Provider store={store}>
+
           <div>
             <Navigation />
             <Main />
@@ -25,8 +26,8 @@ export default React.createClass({
                 <DevTools />
             )}
           </div>
-        </MuiThemeProvider>
-      </Provider>
+          </Provider>
+      </MuiThemeProvider>
     );
   }
 });
