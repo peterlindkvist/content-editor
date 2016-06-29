@@ -1,8 +1,12 @@
 {
+  "posts": ["post"],
+  "users": ["user"],
+  "tags": ["tag"],
+  "categories": ["category"],
   "options": {
     "page_title": "string"
   },
-  "post": [{
+  "post": {
     "title": "string",
     "author": "user",
     "pub_date": "datetime",
@@ -13,13 +17,13 @@
     "parent": "post",
     "comments": ["comment"],
     "tags": ["tag"],
-    "status": "_status"
-  }],
-  "user": [{
+    "status": "status"
+  },
+  "user": {
     "email": "email",
     "name": "string"
-  }],
-  "_status": ["draft", "published"],
+  },
+  "status": ["draft", "published"],
   "comment": {
     "post": "post",
     "author": "user",
@@ -33,6 +37,7 @@
   "category": {
     "name": "string",
     "description": "html",
-    "parent": "category"
+    "parent": "category",
+    "childs": ["category"]
   }
 }
