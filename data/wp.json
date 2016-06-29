@@ -1,12 +1,8 @@
 {
-  "posts": ["post"],
-  "users": ["user"],
-  "tags": ["tag"],
-  "categories": ["category"],
   "options": {
     "page_title": "string"
   },
-  "post": {
+  "post": [{
     "title": "string",
     "author": "user",
     "pub_date": "datetime",
@@ -14,30 +10,30 @@
     "content": "html",
     "excerpt": "text",
     "status": "status",
-    "parent": "post",
-    "comments": ["comment"],
-    "tags": ["tag"],
-    "status": "status"
-  },
-  "user": {
+    "parent": "post[0]",
+    "comments": ["comment[0]"],
+    "tags": ["tag[0]"],
+    "status": "_status"
+  }],
+  "user": [{
     "email": "email",
     "name": "string"
-  },
-  "status": ["draft", "published"],
+  }],
+  "_status": ["draft", "published"],
   "comment": {
-    "post": "post",
-    "author": "user",
+    "post": "post[0]",
+    "author": "user[0]",
     "date": "date",
     "content": "html"
   },
-  "tag" :{
+  "tag" :[{
     "name": "string",
     "description": "html"
-  },
-  "category": {
+  }],
+  "category": [{
     "name": "string",
     "description": "html",
-    "parent": "category",
-    "childs": ["category"]
-  }
+    "parent": "category[0]",
+    "childs": ["category[0]"]
+  }]
 }
