@@ -5,7 +5,7 @@ import * as ContentActions from '../actions/ContentActions';
 import * as AppActions from '../actions/AppActions';
 import styles from '../../css/app.css';
 import _ from 'lodash';
-import mui, {AppBar, Drawer, MenuItem} from 'material-ui';
+import mui, {AppBar, Drawer, MenuItem, List, ListItem} from 'material-ui';
 import * as EditorUtils from '../utils/EditorUtils';
 
 class Navigation extends Component {
@@ -39,19 +39,18 @@ class Navigation extends Component {
           open={drawer_open} onRequestChange={this._handleChange}>
 
           { _.map(data, (obj, key) =>
-            <div>
-              <MenuItem key={key} onTouchTap={this._handleOpen(false)}>{key}</MenuItem>
-
-              {( _.isArray(obj) &&
-                <MenuItem>
-                  { _.map(obj, (child, i) =>
-                    <MenuItem key={(key + i)} onTouchTap={this._handleOpen(false)}>
-                      {EditorUtils.getTitle(child)}
-                    </MenuItem>
-                  )}
-                </MenuItem>
+            <List>
+              {( _.isArray(obj) ?
+                <ListItem  primaryText={key} initiallyOpen={false} primaryTogglesNestedList={true}
+                 nestedItems={
+                   _.map(obj, (child, i) =>
+                     <ListItem key={key + i} primaryText={EditorUtils.getTitle(child)} />
+                   )}
+               />
+              :
+                <ListItem primaryText={key} key={key} onTouchTap={this._handleOpen(false)} />
               )}
-            </div>
+            </List>
           )}
 
         </Drawer>
