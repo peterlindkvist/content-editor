@@ -5,8 +5,8 @@
   "post": [{
     "title": "post 1",
     "author": "user",
-    "pub_date": "datetime",
-    "mod_date": "datetime",
+    "pub_date": "Thu Jun 30 2016 13:31:48 GMT+0200 (CEST)",
+    "mod_date": "Thu Jun 30 2016 13:31:48 GMT+0200 (CEST)",
     "content": "This is a long \n multiline text",
     "excerpt": "text",
     "status": "status",

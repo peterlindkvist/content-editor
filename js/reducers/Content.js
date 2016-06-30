@@ -7,7 +7,7 @@ let defaultState = {
 export default function(state = defaultState, action) {
   switch (action.type) {
     case ActionTypes.CONTENT_UPDATED:
-      return {...state, data: action.data};
+      return {...state, data: action.data, schema: action.schema};
     default:
       return state;
   }

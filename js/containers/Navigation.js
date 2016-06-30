@@ -39,16 +39,16 @@ class Navigation extends Component {
           open={drawer_open} onRequestChange={this._handleChange}>
 
           { _.map(data, (obj, key) =>
-            <List>
+            <List key={'list_' + key}>
               {( _.isArray(obj) ?
-                <ListItem  primaryText={key} initiallyOpen={false} primaryTogglesNestedList={true}
+                <ListItem key={key} primaryText={key} initiallyOpen={false} primaryTogglesNestedList={true}
                  nestedItems={
                    _.map(obj, (child, i) =>
                      <ListItem key={key + i} primaryText={EditorUtils.getTitle(child)} />
                    )}
                />
               :
-                <ListItem primaryText={key} key={key} onTouchTap={this._handleOpen(false)} />
+                <ListItem key={key} primaryText={key} onTouchTap={this._handleOpen(false)} />
               )}
             </List>
           )}
