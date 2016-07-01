@@ -10,9 +10,9 @@
     "content": "html",
     "excerpt": "text",
     "status": "status",
-    "parent": "post",
-    "comments": ["comment"],
-    "tags": ["tag"],
+    "parent": "post[0]",
+    "comments": ["comment[0]"],
+    "tags": ["tag[0]"],
     "status": "_status"
   }],
   "user": [{
@@ -21,18 +21,19 @@
   }],
   "_status": ["draft", "published"],
   "comment": {
-    "post": "post",
-    "author": "user",
+    "post": "post[0]",
+    "author": "user[0]",
     "date": "date",
     "content": "html"
   },
-  "tag" :{
+  "tag" :[{
     "name": "string",
     "description": "html"
-  },
-  "category": {
+  }],
+  "category": [{
     "name": "string",
     "description": "html",
-    "parent": "category"
-  }
+    "parent": "category[0]",
+    "childs": ["category[0]"]
+  }]
 }
