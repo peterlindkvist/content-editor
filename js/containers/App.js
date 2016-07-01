@@ -22,7 +22,7 @@ export default React.createClass({
           <div>
             <Navigation />
             <Main />
-            {(__DEV__ &&
+            {(false && __DEV__ &&
                 <DevTools />
             )}
           </div>

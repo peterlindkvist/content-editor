@@ -8,6 +8,7 @@ import * as EditorUtils from '../utils/EditorUtils';
 import {TextField, DatePicker, TimePicker} from 'material-ui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
+import HTMLEditor from './HTMLEditor';
 import styles from '../../css/app.css';
 
 class Home extends Component {
@@ -23,20 +24,41 @@ class Home extends Component {
     return type
   }
 
+
+
+  onChange(value){
+    //this.state.value = value
+    console.log("change", value);
+  }
+
   getElement(value, name, path){
     const {data, schema} = this.props;
     let type = _.get(schema, path);
     let key = name;
-    console.log("getEl", path, type);
+    const attr = {
+      key: name,
+      id: name,
+      floatingLabelText: name,
+      floatingLabelFixed: true,
+      value
+    }
 
+    let editorConfig = {
+
+    }
+
+    console.log("getEl", path, type);
     if(typeof type === 'string'){
       switch (type) {
         case 'string':
-          return (<TextField key={key} id={key} floatingLabelText={name}
-            floatingLabelFixed={true} value={value}/>)
+          return (<TextField {...attr}/>)
         case 'text':
-          return (<TextField key={key} id={key} floatingLabelText={name}
-            floatingLabelFixed={true}  multiLine={true} value={value}/>)
+          return (<TextField multiLine={true} {...attr} />)
+        case 'number':
+        case 'email':
+          return (<TextField type={type} {...attr} />)
+        case 'html':
+          return (<HTMLEditor />)
         case 'time':
           return (<TimePicker key={key} id={key} floatingLabelFixed={true}
             floatingLabelText={name} format='24hr' value={new Date(value)}/>)
@@ -68,7 +90,7 @@ class Home extends Component {
         <CardHeader title={EditorUtils.getTitle(node)} />
         <CardText>
           {_.map(node, (row, name) =>
-            <section>
+            <section key={name}>
               {_this.getElement(row, name, path + '.' + name)}
             </section>
           )}
