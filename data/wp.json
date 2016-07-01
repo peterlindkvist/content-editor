@@ -11,8 +11,8 @@
     "excerpt": "text",
     "status": "status",
     "parent": "post[0]",
-    "comments": ["comment[0]"],
-    "tags": ["tag[0]"],
+    "comments": ["comment"],
+    "tags": ["tag"],
     "status": "_status"
   }],
   "user": [{
@@ -21,8 +21,8 @@
   }],
   "_status": ["draft", "published"],
   "comment": {
-    "post": "post[0]",
-    "author": "user[0]",
+    "post": "post",
+    "author": "user",
     "date": "date",
     "content": "html"
   },
@@ -33,7 +33,7 @@
   "category": [{
     "name": "string",
     "description": "html",
-    "parent": "category[0]",
-    "childs": ["category[0]"]
+    "parent": "category",
+    "childs": ["category"]
   }]
 }
