@@ -7,16 +7,14 @@ import _ from 'lodash';
 import * as EditorUtils from '../utils/EditorUtils';
 import {TextField, DatePicker, TimePicker} from 'material-ui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-
+import Navigation from '../containers/Navigation';
 import HTMLEditor from '../components/HTMLEditor';
 import styles from '../../css/app.css';
 
 class Home extends Component {
   getType(obj, path, schema){
     let type = _.get(schema, path);
-    console.log("getType", obj, path, schema, stype);
     if(type === 'string'){
-      console.log("html?", type, obj.indexOf("\n"))
       if(obj.indexOf("\n") !== -1){
         type = 'text'
       }
@@ -40,6 +38,7 @@ class Home extends Component {
       id: name,
       floatingLabelText: name,
       floatingLabelFixed: true,
+      fullWidth: true,
       value
     }
 
@@ -47,7 +46,6 @@ class Home extends Component {
 
     }
 
-    console.log("getEl", path, type);
     if(typeof type === 'string'){
       switch (type) {
         case 'string':
@@ -85,6 +83,7 @@ class Home extends Component {
   renderCard(path) {
     const _this = this;
     const node = _.get(this.props.data, path);
+
     return (
       <Card>
         <CardHeader title={EditorUtils.getTitle(node)} />
@@ -100,24 +99,27 @@ class Home extends Component {
   }
 
   render() {
-    const {path, node, data} = this.props;
-    console.log("node", data, node);
+    const {path} = this.props;
+    console.log("node", path);
 
     return (
-      <main>
-        {this.renderCard(path)}
-      </main>
+      <div>
+        <Navigation />
+        <main>
+          {this.renderCard(path)}
+        </main>
+      </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  console.log("Man msptp", ownProps);
   return {
-    path: state.Content.path,
-    node: _.get(state.Content.data, state.Content.path),
     data: state.Content.data,
     schema: state.Content.schema,
-    title: state.Sample.title
+    title: state.Sample.title,
+    path: ownProps.params.path
   }
 }
 

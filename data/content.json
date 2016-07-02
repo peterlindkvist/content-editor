@@ -1,6 +1,6 @@
 {
   "options": {
-    "page_title": "string"
+    "page_title": "wp-ish"
   },
   "post": [{
     "title": "post 1",
@@ -35,7 +35,7 @@
     "post": "post",
     "title": "title",
     "author": "user",
-    "date": "date",
+    "date": "Sat Jul 02 2016 20:52:25 GMT+0200 (CEST)",
     "content": "html"
   },
   "tag" :{
@@ -43,7 +43,7 @@
     "description": "html"
   },
   "category": {
-    "name": "string",
+    "name": "cat1",
     "description": "html",
     "parent": "category"
   }
