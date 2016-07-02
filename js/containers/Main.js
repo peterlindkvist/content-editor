@@ -8,7 +8,7 @@ import * as EditorUtils from '../utils/EditorUtils';
 import {TextField, DatePicker, TimePicker} from 'material-ui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
-import HTMLEditor from './HTMLEditor';
+import HTMLEditor from '../components/HTMLEditor';
 import styles from '../../css/app.css';
 
 class Home extends Component {
@@ -58,7 +58,7 @@ class Home extends Component {
         case 'email':
           return (<TextField type={type} {...attr} />)
         case 'html':
-          return (<HTMLEditor />)
+          return (<HTMLEditor value={value}/>)
         case 'time':
           return (<TimePicker key={key} id={key} floatingLabelFixed={true}
             floatingLabelText={name} format='24hr' value={new Date(value)}/>)
