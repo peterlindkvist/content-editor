@@ -20,12 +20,12 @@
     "name": "string"
   }],
   "_status": ["draft", "published"],
-  "comment": {
+  "comment": [{
     "post": "post",
     "author": "user",
     "date": "date",
     "content": "html"
-  },
+  }],
   "tag" :[{
     "name": "string",
     "description": "html"

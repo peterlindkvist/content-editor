@@ -26,7 +26,7 @@ export default React.createClass({
                 <Route path=":path" component={Main} />
               </Route>
             </ReduxRouter>
-            {(true && __DEV__ &&
+            {(false && __DEV__ &&
                 <DevTools />
             )}
           </div>

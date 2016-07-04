@@ -16,6 +16,9 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 app.use('/data', express.static('data'));
 app.use('/assets', express.static('assets'));
+app.use('/filelist.txt', function(req, res){
+  res.send(404);
+});
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));

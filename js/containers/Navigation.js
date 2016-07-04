@@ -5,7 +5,7 @@ import * as ContentActions from '../actions/ContentActions';
 import * as AppActions from '../actions/AppActions';
 import styles from '../../css/app.css';
 import _ from 'lodash';
-import mui, {AppBar, Drawer, MenuItem, List, ListItem} from 'material-ui';
+import mui, {AppBar, Drawer, MenuItem, List, ListItem, FlatButton} from 'material-ui';
 import * as EditorUtils from '../utils/EditorUtils';
 import { push } from 'redux-router'
 
@@ -15,10 +15,7 @@ class Navigation extends Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleOpen = this._handleOpen.bind(this);
     this._handleClick = this._handleClick.bind(this);
-  }
-
-  componentDidMount(){
-    this.props.dispatch(ContentActions.update());
+    this._handleSave = this._handleSave.bind(this);
   }
 
   _handleOpen(open) {
@@ -33,16 +30,18 @@ class Navigation extends Component {
 
   _handleClick(path) {
     return function(evt){
-      console.log("push", path);
       this.props.dispatch(push({ pathname: path }));
       this.props.dispatch(AppActions.showDrawer(false));
 
     }.bind(this);
   }
 
+  _handleSave(evt) {
+    this.props.dispatch(ContentActions.save());
+  }
+
   render() {
     const {title, data, drawer_open} = this.props;
-    console.log("props", _.map(data, (value, key) => {return key}));
     const _this = this;
 
     return (
@@ -70,7 +69,7 @@ class Navigation extends Component {
         </Drawer>
         <header>
           <AppBar title={title} onLeftIconButtonTouchTap={this._handleOpen(true)}
-            isInitiallyOpen={true} />
+            iconElementRight={<FlatButton label="Save" onClick={this._handleSave}/>} />
         </header>
       </div>
     );
@@ -82,9 +81,8 @@ Navigation.childContextTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("mstp", ownProps);
   return {
-    data: state.Content.data,
+    data: state.Content.data ? state.Content.data.toJS() : null,
     title: state.Sample.title,
     drawer_open: state.App.drawer_open,
   }

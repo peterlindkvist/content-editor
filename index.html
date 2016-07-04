@@ -6,9 +6,19 @@
   <link href="./static/app.css" rel="stylesheet" type="text/css" />
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
   <style>
+  /* to have CSS here is not ok, but works for now */
   .public-DraftEditor-content {
-    /* this is not ok, but works for now */
     min-height: 300px;
+  }
+
+  .editor-datetime {
+    display:flex;
+  }
+  .editor-datetime>div{
+    width: calc(50% - 10px);
+  }
+  .editor-datetime>div:last-child{
+    padding-left: 20px;
   }
   </style>
 </head>
@@ -17,5 +27,7 @@
   <div id="main"></div>
 
   <script src="./static/bundle.js"></script>
+  <!-- <img src="/data/wp.json"/> -->
+  <!-- <img src="/data/content.json"/> -->
 </body>
 </html>
