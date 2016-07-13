@@ -1,5 +1,5 @@
 export function getTitle (obj = {name:'missing'}) {
-  return obj.name || obj.title;
+  return typeof obj === 'string' ? obj : obj.name || obj.title;
 }
 
 export function downloadFile(filename, content, contentType){
@@ -12,8 +12,7 @@ export function downloadFile(filename, content, contentType){
     var event = document.createEvent('MouseEvents');
     event.initEvent('click', true, true);
     elem.dispatchEvent(event);
-  }
-  else {
+  } else {
     elem.click();
   }
 };

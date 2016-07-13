@@ -1,0 +1,42 @@
+{
+  "primitives" : {
+    "string": "Simple string input",
+    "number": 1
+  },
+  "nested" : {
+    "depth": 1,
+    "object" : {
+      "title": "level 2",
+      "depth": 2,
+      "object" : {
+        "title": "level 3",
+        "depth": 3,
+        "object" : {
+          "title": "level 4",
+          "depth": 4
+        }
+      }
+    },
+    "array_of_string" : [
+      "pos 1",
+      "pos 2"
+    ],
+    "array_of_objects" : [
+      {
+        "title" : "Array of objects 1",
+        "depth" : 3
+      },
+      {
+        "title" : "Array of objects 2",
+        "depth" : 3
+      }
+    ]
+  },
+  "references" : {
+    "one_to_one": "#primitives"
+  },
+  "circular" : {
+    "text": "string",
+    "children": "#circular"
+  }
+}

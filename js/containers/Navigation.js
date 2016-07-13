@@ -48,9 +48,9 @@ class Navigation extends Component {
       <div>
         <Drawer ref="leftNav" docked={false} width={200}
           open={drawer_open} onRequestChange={this._handleChange}>
-
+          <List >
           { _.map(data, (obj, key) =>
-            <List key={'list_' + key}>
+            <div key={'list_' + key}>
               {( _.isArray(obj) ?
                 <ListItem key={key} primaryText={key} initiallyOpen={false}
                 primaryTogglesNestedList={true} onTouchTap={this._handleClick('/' + key)}
@@ -63,8 +63,9 @@ class Navigation extends Component {
               :
                 <ListItem key={key} primaryText={key} onTouchTap={_this._handleClick('/' + key)} />
               )}
-            </List>
+              </div>
           )}
+          </List>
 
         </Drawer>
         <header>

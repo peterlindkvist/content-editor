@@ -1,0 +1,37 @@
+{
+  "primitives" : {
+    "string": "string",
+    "number": "number"
+  },
+  "nested" : {
+    "depth": "number",
+    "object" : {
+      "title": "string",
+      "depth": "number",
+      "object" : {
+        "title": "string",
+        "depth": "number",
+        "object" : {
+          "title": "string",
+          "depth": "number"
+        }
+      }
+    },
+    "array_of_string" : [
+      "string"
+    ],
+    "array_of_objects" : [
+      {
+        "title" : "string",
+        "depth" : "number"
+      }
+    ]
+  },
+  "references" : {
+    "one_to_one": "primitives"
+  },
+  "circular" : {
+    "text": "string",
+    "children": "circular"
+  }
+}

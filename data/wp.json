@@ -13,13 +13,13 @@
     "parent": "post[0]",
     "comments": ["comment"],
     "tags": ["tag"],
-    "status": "_status"
+    "status": "status"
   }],
   "user": [{
     "email": "email",
     "name": "string"
   }],
-  "_status": ["draft", "published"],
+  "status": ["draft", "published"],
   "comment": [{
     "post": "post",
     "author": "user",
