@@ -1,11 +1,11 @@
-import {CONTENT_REFRESH, CONTENT_UPDATED, CONTENT_UPDATE_VALUE, CONTENT_SAVE} from '../constants/ActionTypes';
+import * as ActionTypes from '../constants/ActionTypes';
 import fetch from 'isomorphic-fetch';
 import * as EditorUtils from '../utils/EditorUtils';
 const stripJsonComments = require('strip-json-comments');
 
 function contentUpdated(contentJSON, schemaJSON){
   return {
-    type: CONTENT_UPDATED,
+    type: ActionTypes.CONTENT_UPDATED,
     data: contentJSON,
     schema: schemaJSON
   };
@@ -13,25 +13,35 @@ function contentUpdated(contentJSON, schemaJSON){
 
 function contentRefresh(parameter){
   return {
-    type: CONTENT_REFRESH,
+    type: ActionTypes.CONTENT_REFRESH,
     parameter
   };
 }
 
 export function set(path, value){
   return {
-    type: CONTENT_UPDATE_VALUE,
+    type: ActionTypes.CONTENT_UPDATE_VALUE,
     path,
     value
   }
 }
+
+export function addArrayItem(itemPath, dataPath, index){
+  return {
+    type: ActionTypes.CONTENT_ADD_ARRAY_ITEM,
+    itemPath,
+    dataPath,
+    index
+  }
+}
+
 
 export function save(path, value){
   return (dispatch, getState) => {
     const json = JSON.stringify(getState().Content.data, null, 2);
     EditorUtils.downloadFile('content.json', json, 'application/json');
     return {
-      type: CONTENT_SAVE,
+      type: ActionTypes.CONTENT_SAVE,
       json
     }
   }

@@ -1,13 +1,15 @@
 import React, {Component, PropTypes} from 'react';
-import {TextField, DatePicker, TimePicker, MenuItem, SelectField} from 'material-ui';
+import {TextField, DatePicker, TimePicker, MenuItem, SelectField, RaisedButton} from 'material-ui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import HTMLEditor from '../components/HTMLEditor';
+import ItemArray from '../components/ItemArray';
 import * as EditorUtils from '../utils/EditorUtils';
 
 
 class EditorCard extends Component {
   static propTypes = {
     onChange: PropTypes.func,
+    onAddArrayItem: PropTypes.func,
     path: PropTypes.string,
     data: PropTypes.object,
     schema: PropTypes.object,
@@ -18,6 +20,11 @@ class EditorCard extends Component {
 
   state = {
     expanded: false
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {addValue: -1};
   }
 
   isPrimitive(type){
@@ -109,13 +116,11 @@ class EditorCard extends Component {
     //console.log("renderElement", this, path, type, typeof type, _.isArray(type));
 
     if(_.isArray(type)){
-      return _.map(value, (v, i) =>
-        <div key={fullpath + '[' + i + ']'}>
-          {_this.renderElement(_.get(data, path + '[' + i + ']'), name + '[' + i + ']', path + '[' + i + ']', true, fullpath + '.' + name + '[' + i + ']')}
-        </div>
-      )
+      //return this.renderArray(value, path, fullpath);
+      return <ItemArray path={path} fullpath={fullpath} onAdd={this.props.onAddArrayItem}
+        data={data} schema={schema} renderElement={this.renderElement.bind(this)}/>
     } else if(_.isObject(type)){
-      return <EditorCard path={path}  fullpath={fullpath + '.' + name}
+      return <EditorCard path={path} fullpath={fullpath + '.' + name}
         expandable={true} data={data} schema={schema} onChange={this.props.onChange}/>
     } else if(typeof type === 'string'){
       if(this.isPrimitive(type)){

@@ -13,6 +13,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this._handleChange = this._handleChange.bind(this);
+    this._handleAddArrayItem = this._handleAddArrayItem.bind(this);
   }
 
   componentDidMount(){
@@ -27,6 +28,11 @@ class Main extends Component {
     this.props.dispatch(ContentActions.set(path, value));
   }
 
+  _handleAddArrayItem(itemPath, dataPath, index){
+    console.log("Main: _handleAddItem", itemPath, dataPath, index)
+    this.props.dispatch(ContentActions.addArrayItem(itemPath, dataPath, index));
+  }
+
   render() {
     const {path, data, schema} = this.props;
 
@@ -36,7 +42,7 @@ class Main extends Component {
         <main>
           {(data ?
             <EditorCard path={path} key={path} data={data} schema={schema}
-            expandable={false} onChange={this._handleChange} title={path}/>
+            expandable={false} onChange={this._handleChange} onAddArrayItem={this._handleAddArrayItem} title={path}/>
           :
             <span> Loading data </span>
           )}

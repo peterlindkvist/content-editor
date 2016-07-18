@@ -1,7 +1,14 @@
 {
   "primitives" : {
     "string": "string",
-    "number": "number"
+    "email": "email",
+    "password": "password",
+    "number": "number",
+    "date": "date",
+    "time": "time",
+    "datetime": "datetime",
+    "text": "text",
+    "html": "html"
   },
   "nested" : {
     "depth": "number",
@@ -28,10 +35,15 @@
     ]
   },
   "references" : {
-    "one_to_one": "primitives"
+    "one_to_one": "primitives",
+    "one_to_many": ["array"],
+    "one_to_many2": ["array"]
   },
   "circular" : {
-    "text": "string",
+    "title": "string",
     "children": "circular"
-  }
+  },
+  "array": [{
+      "title": "string"
+  }]
 }

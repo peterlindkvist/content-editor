@@ -1,7 +1,14 @@
 {
   "primitives" : {
     "string": "Simple string input",
-    "number": 1
+    "email": "hi@example.com",
+    "password": "123456",
+    "number": 1,
+    "date": "Thu Jul 14 2016 07:46:52 GMT+0200 (CEST)",
+    "time": "Thu Jul 14 2016 07:46:52 GMT+0200 (CEST)",
+    "datetime": "Thu Jul 14 2016 07:46:52 GMT+0200 (CEST)",
+    "text": "A multiline\n input",
+    "html": "<p><h1>Html editor</h1></p>"
   },
   "nested" : {
     "depth": 1,
@@ -33,10 +40,19 @@
     ]
   },
   "references" : {
-    "one_to_one": "#primitives"
+    "one_to_one": "#primitives",
+    "one_to_many": ["#array[1]","#array[0]"],
+    "one_to_many2": ["#array[2]"]
   },
   "circular" : {
-    "text": "string",
+    "title": "string",
     "children": "#circular"
-  }
+  },
+  "array": [{
+      "title": "array 1"
+  },{
+      "title": "array 2"
+  },{
+      "title": "array 3"
+  }]
 }

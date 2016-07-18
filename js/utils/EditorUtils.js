@@ -16,3 +16,7 @@ export function downloadFile(filename, content, contentType){
     elem.click();
   }
 };
+
+export function getImmutableKeyPath(path){
+  return path.replace(/\[([0-9]*)\]/g, '.$1').split('.');
+}
