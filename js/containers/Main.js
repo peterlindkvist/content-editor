@@ -14,6 +14,8 @@ class Main extends Component {
     super(props);
     this._handleChange = this._handleChange.bind(this);
     this._handleAddArrayItem = this._handleAddArrayItem.bind(this);
+    this._handleRemoveItem = this._handleRemoveItem.bind(this);
+    this._handleMoveItem = this._handleMoveItem.bind(this);
   }
 
   componentDidMount(){
@@ -28,9 +30,19 @@ class Main extends Component {
     this.props.dispatch(ContentActions.set(path, value));
   }
 
-  _handleAddArrayItem(itemPath, dataPath, index){
-    console.log("Main: _handleAddItem", itemPath, dataPath, index)
-    this.props.dispatch(ContentActions.addArrayItem(itemPath, dataPath, index));
+  _handleAddArrayItem(path, itemType, isReference, index){
+    console.log("Main: _handleAddItem", path, itemType, isReference, index)
+    this.props.dispatch(ContentActions.addArrayItem(path, itemType, isReference, index));
+  }
+
+  _handleRemoveItem(path, index){
+    console.log("Main: remove", path, index);
+    this.props.dispatch(ContentActions.removeArrayItem(path, index));
+  }
+
+  _handleMoveItem(path, fromIndex, toIndex){
+    console.log("Main: move", path, fromIndex, toIndex);
+    this.props.dispatch(ContentActions.moveArrayItem(path, fromIndex, toIndex));
   }
 
   render() {
@@ -41,8 +53,9 @@ class Main extends Component {
         <Navigation/>
         <main>
           {(data ?
-            <EditorCard path={path} key={path} data={data} schema={schema}
-            expandable={false} onChange={this._handleChange} onAddArrayItem={this._handleAddArrayItem} title={path}/>
+            <EditorCard path={path} key={path} data={data} schema={schema}  title={path} expandable={false}
+            onChange={this._handleChange} onAddArrayItem={this._handleAddArrayItem} onRemoveItem={this._handleRemoveItem}
+            onMoveItem={this._handleMoveItem}/>
           :
             <span> Loading data </span>
           )}

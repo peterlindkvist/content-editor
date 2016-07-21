@@ -20,3 +20,17 @@ export function downloadFile(filename, content, contentType){
 export function getImmutableKeyPath(path){
   return path.replace(/\[([0-9]*)\]/g, '.$1').split('.');
 }
+
+export function isPrimitive(type){
+    return [
+      'string',
+      'text',
+      'number',
+      'email',
+      'password',
+      'html',
+      'time',
+      'date',
+      'datetime'
+    ].indexOf(type) !== -1
+  }

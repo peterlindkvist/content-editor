@@ -2,9 +2,50 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JSON editor</title>
   <link href="./static/app.css" rel="stylesheet" type="text/css" />
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+  <style>
+  /* pre-built style  from react-anything-sortable*/
+  .ui-sortable {
+    display: block;
+    position: relative;
+    overflow: visible;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  .ui-sortable:before,
+  .ui-sortable:after{
+    content: " ";
+    display: table;
+  }
+
+  .ui-sortable:after{
+    clear: both;
+  }
+
+  .ui-sortable .ui-sortable-item {
+    float: left;
+    cursor: move;
+  }
+
+  .ui-sortable .ui-sortable-item.ui-sortable-dragging {
+    position: absolute;
+    z-index: 1688;
+  }
+
+  .ui-sortable .ui-sortable-placeholder {
+    display: none;
+  }
+
+  .ui-sortable .ui-sortable-placeholder.visible {
+    display: block;
+    z-index: -1;
+  }
+  </style>
   <style>
   /* to have CSS here is not ok, but works for now */
   .public-DraftEditor-content {
@@ -20,6 +61,32 @@
   .editor-datetime>div:last-child{
     padding-left: 20px;
   }
+
+  .item-array {
+    display: flex;
+  }
+
+  .item-array--item {
+    width: calc(100% - 60px);
+  }
+
+  .item-array--actions {
+    width: 60px;
+    padding: 10px;
+  }
+  .item-array--dragitem{
+    padding-right: 10px;
+    cursor: move;
+  }
+
+  .ui-sortable .ui-sortable-item {
+    float: none;
+    cursor: inherit;
+  }
+
+
+
+
   </style>
 </head>
 <body>
@@ -27,7 +94,7 @@
   <div id="main"></div>
 
   <script src="./static/bundle.js"></script>
-  <!-- <img src="/data/wp.json"/> -->
-  <!-- <img src="/data/content.json"/> -->
+  <!-- <img src="/data/test.json"/> -->
+  <!-- <img src="/data/test_schema.json"/> -->
 </body>
 </html>

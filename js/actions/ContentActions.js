@@ -18,6 +18,13 @@ function contentRefresh(parameter){
   };
 }
 
+function contentSave(json){
+  return {
+    type: ActionTypes.CONTENT_SAVE,
+    json
+  }
+}
+
 export function set(path, value){
   return {
     type: ActionTypes.CONTENT_UPDATE_VALUE,
@@ -26,12 +33,30 @@ export function set(path, value){
   }
 }
 
-export function addArrayItem(itemPath, dataPath, index){
+export function addArrayItem(path, itemType, isReference, index){
   return {
     type: ActionTypes.CONTENT_ADD_ARRAY_ITEM,
-    itemPath,
-    dataPath,
+    path,
+    itemType,
+    isReference,
     index
+  }
+}
+
+export function removeArrayItem(path, index){
+  return {
+    type: ActionTypes.CONTENT_REMOVE_ARRAY_ITEM,
+    path,
+    index
+  }
+}
+
+export function moveArrayItem(path, fromIndex, toIndex){
+  return {
+    type: ActionTypes.CONTENT_MOVE_ARRAY_ITEM,
+    path,
+    fromIndex,
+    toIndex
   }
 }
 
@@ -40,10 +65,7 @@ export function save(path, value){
   return (dispatch, getState) => {
     const json = JSON.stringify(getState().Content.data, null, 2);
     EditorUtils.downloadFile('content.json', json, 'application/json');
-    return {
-      type: ActionTypes.CONTENT_SAVE,
-      json
-    }
+    dispatch(contentSave(json));
   }
 }
 

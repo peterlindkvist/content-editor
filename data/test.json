@@ -26,7 +26,10 @@
     },
     "array_of_string" : [
       "pos 1",
-      "pos 2"
+      "pos 2",
+      "pos 3",
+      "pos 4",
+      "pos 5"
     ],
     "array_of_objects" : [
       {
