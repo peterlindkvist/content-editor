@@ -23,12 +23,15 @@ export function getImmutableKeyPath(path){
 
 export function isPrimitive(type){
     return [
+      'boolean',
       'string',
       'text',
       'number',
       'email',
       'password',
+      'url',
       'html',
+      'image',
       'time',
       'date',
       'datetime'

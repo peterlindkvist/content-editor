@@ -52,6 +52,11 @@
     min-height: 300px;
   }
 
+  .editor-card--header-small {
+    font-size: 10px;
+    opacity: 0.5;
+  }
+
   .editor-datetime {
     display:flex;
   }
@@ -66,12 +71,17 @@
     display: flex;
   }
 
+  .item-array--add {
+    margin-left: 20px;
+  }
+
   .item-array--item {
-    width: calc(100% - 60px);
+    width: calc(100% - 65px);
+    padding-left: 10px;
   }
 
   .item-array--actions {
-    width: 60px;
+    width: 65px;
     padding: 10px;
   }
   .item-array--dragitem{
@@ -84,7 +94,22 @@
     cursor: inherit;
   }
 
+  .image {
+    position: relative;
+  }
 
+  .image--container {
+    width: 204px;
+    height: 204px;
+    position: absolute;
+    top: 0;
+  }
+
+  .image--metadata {
+    position: absolute;
+    top: 0;
+    left: 250px;
+  }
 
 
   </style>

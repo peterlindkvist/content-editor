@@ -10,9 +10,10 @@ import * as EditorUtils from '../utils/EditorUtils';
 class EditorCard extends Component {
   static propTypes = {
     onChange: PropTypes.func,
-    onAddArrayItem: PropTypes.func,
+    onAddItem: PropTypes.func,
     onRemoveItem: PropTypes.func,
     onMoveItem: PropTypes.func,
+    onUpload: PropTypes.func,
     path: PropTypes.string,
     data: PropTypes.object,
     schema: PropTypes.object,
@@ -31,17 +32,15 @@ class EditorCard extends Component {
   }
 
   renderContent(path, fullpath=path) {
-    const {data, schema, onChange, onAddArrayItem, onRemoveItem, onMoveItem} = this.props
+    const {data} = this.props
     const node = _.get(data, path);
 
-    if(_.isArray(node) || _.isObject(node)){
+    if(_.isArray(node)){
+      return <ItemArray {...this.props} />
+    } else if(_.isObject(node)){
       return (_.map(node, (row, name) =>
         <div key={fullpath + '.'+ name}>
-          <span>{name + ' (' +  path + '.' + name + '):'}</span>
-          <ElementContainer name={name} path={path + '.' + name}
-            fullpath={fullpath} data={data} schema={schema}
-            onChange={onChange} onAddArrayItem={onAddArrayItem}
-            onRemoveItem={onRemoveItem} onMoveItem={onMoveItem} />
+          <ElementContainer {...this.props} name={name + ''} path={path + '.' + name} />
         </div>
       ))
     } else {

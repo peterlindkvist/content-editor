@@ -2,6 +2,7 @@ import * as ActionTypes from '../constants/ActionTypes';
 import fetch from 'isomorphic-fetch';
 import * as EditorUtils from '../utils/EditorUtils';
 const stripJsonComments = require('strip-json-comments');
+const request = require('superagent');
 
 function contentUpdated(contentJSON, schemaJSON){
   return {
@@ -24,6 +25,23 @@ function contentSave(json){
     json
   }
 }
+
+function contentUploadStart(path, files){
+  return {
+    type: ActionTypes.CONTENT_UPLOAD_START,
+    path,
+    files
+  }
+}
+
+function contentUploadDone(path, url){
+  return {
+    type: ActionTypes.CONTENT_UPLOAD_DONE,
+    path,
+    url
+  }
+}
+
 
 export function set(path, value){
   return {
@@ -60,6 +78,15 @@ export function moveArrayItem(path, fromIndex, toIndex){
   }
 }
 
+export function error(message, error){
+  alert('ERROR: ' + message + ' : ' + error);
+  return {
+    type: ActionTypes.ERROR,
+    message,
+    error
+  }
+}
+
 
 export function save(path, value){
   return (dispatch, getState) => {
@@ -81,4 +108,29 @@ export function update(parameter) {
       dispatch(contentUpdated(contentJSON, schemaJSON));
     });
   }
+}
+
+export function upload(path, files){
+  return (dispatch, getState) => {
+    console.log("CA Upload", path, files);
+
+     let req = request.post('http://tndr.io/api/release/upload');
+     //req.send({projectname: 'editor'});
+     files.forEach((file) => req.attach(file.name, file));
+     req.end((err, res) => {
+       console.log("Upload Done", err, res);
+      if(err){
+        dispatch(error('Upload failure', err));
+      } else {
+        const json = JSON.parse(res.text);
+        dispatch(set(path, json.files[0]));
+      }
+
+     });
+
+
+    dispatch(contentUploadStart(path, files));
+  }
+
+
 }

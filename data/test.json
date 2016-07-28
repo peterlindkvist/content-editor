@@ -1,9 +1,19 @@
 {
   "primitives" : {
+    "boolean": true,
     "string": "Simple string input",
     "email": "hi@example.com",
     "password": "123456",
     "number": 1,
+    "url": "example.com",
+    "image": {
+      "url": "-",
+      "width": 100,
+      "height": 100,
+      "caption": "the image caption",
+      "type": "-",
+      "name": "-"
+    },
     "date": "Thu Jul 14 2016 07:46:52 GMT+0200 (CEST)",
     "time": "Thu Jul 14 2016 07:46:52 GMT+0200 (CEST)",
     "datetime": "Thu Jul 14 2016 07:46:52 GMT+0200 (CEST)",
@@ -12,13 +22,13 @@
   },
   "nested" : {
     "depth": 1,
-    "object" : {
+    "children" : {
       "title": "level 2",
       "depth": 2,
-      "object" : {
+      "children" : {
         "title": "level 3",
         "depth": 3,
-        "object" : {
+        "children" : {
           "title": "level 4",
           "depth": 4
         }

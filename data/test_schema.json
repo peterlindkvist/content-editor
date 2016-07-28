@@ -1,9 +1,13 @@
 {
   "primitives" : {
+    "boolean": "boolean",
     "string": "string",
     "email": "email",
     "password": "password",
     "number": "number",
+    "url": "url",
+    "color": "color",
+    "image": "image",
     "date": "date",
     "time": "time",
     "datetime": "datetime",
@@ -12,13 +16,13 @@
   },
   "nested" : {
     "depth": "number",
-    "object" : {
+    "children" : {
       "title": "string",
       "depth": "number",
-      "object" : {
+      "children" : {
         "title": "string",
         "depth": "number",
-        "object" : {
+        "children" : {
           "title": "string",
           "depth": "number"
         }

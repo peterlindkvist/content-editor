@@ -53,7 +53,7 @@ class Navigation extends Component {
             <div key={'list_' + key}>
               {( _.isArray(obj) ?
                 <ListItem key={key} primaryText={key} initiallyOpen={false}
-                primaryTogglesNestedList={true} onTouchTap={this._handleClick('/' + key)}
+                primaryTogglesNestedList={false} onTouchTap={this._handleClick('/' + key)}
                  nestedItems={
                    _.map(obj, (child, i) =>
                      <ListItem key={key + i} primaryText={EditorUtils.getTitle(child)}
