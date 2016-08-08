@@ -6,7 +6,7 @@ import PrimitiveElement from '../components/PrimitiveElement';
 import EditorCard from '../components/EditorCard';
 import * as EditorUtils from '../utils/EditorUtils';
 import Subheader from 'material-ui/Subheader';
-var titleCase = require('title-case');
+import titleCase from 'title-case';
 
 
 class ElementContainer extends Component {
@@ -33,11 +33,11 @@ class ElementContainer extends Component {
   render(){
     const {name, path, renderChildren, fullpath, movable, data, schema,
       onChange, onAddItem, onRemoveItem, onMoveItem, onUpload} = this.props;
-    const schemapath = path.replace(/\[[0-9]*\]/g, '[0]').replace(/\.[0-9]/g, '.0');
+    const schemapath = EditorUtils.getSchemaPath(path);
     const value = _.get(data, path);
     const type = _.get(schema, schemapath);
 
-    //console.log("renderElement", path, type, typeof type, _.isArray(type), schemapath);
+    //console.log("renderElement", path, value, type, typeof type, _.isArray(type), schemapath);
     const title = titleCase(name)
 
     const attr = {
@@ -69,6 +69,8 @@ class ElementContainer extends Component {
       if(EditorUtils.isPrimitive(type)){
         return <PrimitiveElement value={value} name={title} path={path}
         type={type} onChange={onChange} onUpload={onUpload} />
+      } else if(value === undefined){
+        return <span> Missing value for {path}</span>
       } else if(value[0] === '#'){
         //check for missing types
         const targetPath = value.substr(1)

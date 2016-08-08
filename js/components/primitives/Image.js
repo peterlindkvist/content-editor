@@ -72,7 +72,7 @@ class Image extends Component {
 
   render () {
     const {path, label, src, value} = this.props;
-    console.log("render image", this.props);
+
     const attr = {
       floatingLabelFixed: true,
       floatingLabelText: name,
@@ -81,6 +81,7 @@ class Image extends Component {
       defaultValue: this.state.caption,
       onChange: this._handleChange.bind(this)
     }
+    
     return (
       <div>
         <Subheader>{label}</Subheader>

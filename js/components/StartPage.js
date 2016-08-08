@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import {cyan500} from 'material-ui/styles/colors';
+import titleCase from 'title-case';
 
 class StartPage extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class StartPage extends Component {
       <div style={styles.root}>
         <GridList cellHeight={200} style={styles.gridList}>
           {_.map(schema, (data, name) =>
-            <GridTile key={path + '.' + name} title={name} onClick={this._handleClick(name)}>
+            <GridTile key={path + '.' + name} title={titleCase(name)} onClick={this._handleClick(name)}>
               <ActionHome style={styles.icon} color={cyan500}/>
             </GridTile>
           )}

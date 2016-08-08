@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as ContentActions from '../actions/ContentActions';
-import * as AppActions from '../actions/AppActions';
-import styles from '../../css/app.css';
 import _ from 'lodash';
 import mui, {AppBar, Drawer, MenuItem, List, ListItem, FlatButton} from 'material-ui';
-import * as EditorUtils from '../utils/EditorUtils';
 import { push } from 'redux-router'
+import titleCase from 'title-case';
+import * as AppActions from '../actions/AppActions';
+import * as ContentActions from '../actions/ContentActions';
+import styles from '../../css/app.css';
+import * as EditorUtils from '../utils/EditorUtils';
 
 class Navigation extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class Navigation extends Component {
           { _.map(data, (obj, key) =>
             <div key={'list_' + key}>
               {( _.isArray(obj) ?
-                <ListItem key={key} primaryText={key} initiallyOpen={false}
+                <ListItem key={key} primaryText={titleCase(key)} initiallyOpen={false}
                 primaryTogglesNestedList={false} onTouchTap={this._handleClick('/' + key)}
                  nestedItems={
                    _.map(obj, (child, i) =>
@@ -61,7 +62,7 @@ class Navigation extends Component {
                    )}
                />
               :
-                <ListItem key={key} primaryText={key} onTouchTap={_this._handleClick('/' + key)} />
+                <ListItem key={key} primaryText={titleCase(key)} onTouchTap={_this._handleClick('/' + key)} />
               )}
               </div>
           )}

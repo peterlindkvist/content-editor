@@ -83,6 +83,11 @@ class PrimitiveElement extends Component {
       case 'email':
       case 'password':
         return <TextField {...attr} type={type} />
+      case 'color':
+        return <div className="color">{name} :
+            <input type="color" value={value} onChange={this._handleChange(path, true)} />
+            <input type="text" value={value} onChange={this._handleChange(path, true)} />
+          </div>
       case 'html':
         return <HTMLEditor key={path} value={value} onChange={this._handleChange(path).bind(this)}/>
       case 'image':

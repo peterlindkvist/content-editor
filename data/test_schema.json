@@ -1,5 +1,6 @@
 {
   "primitives" : {
+    "_description" : "this is the basic inputs",
     "boolean": "boolean",
     "string": "string",
     "email": "email",

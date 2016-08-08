@@ -58,6 +58,7 @@ class ItemArray extends Component {
     const items = _.map(value, (v, i) => {
       const index = '[' + i + ']';
       const value = _.get(_this.props.data, path + '[' + i + ']');
+
       return (
         <SortableWrapper key={fullpath + index} sortData={i}>
           <div  className="item-array">

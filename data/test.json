@@ -6,13 +6,14 @@
     "password": "123456",
     "number": 1,
     "url": "example.com",
+    "color": "#bada55",
     "image": {
-      "url": "-",
+      "url": "",
       "width": 100,
       "height": 100,
       "caption": "the image caption",
-      "type": "-",
-      "name": "-"
+      "type": "",
+      "name": ""
     },
     "date": "Thu Jul 14 2016 07:46:52 GMT+0200 (CEST)",
     "time": "Thu Jul 14 2016 07:46:52 GMT+0200 (CEST)",
