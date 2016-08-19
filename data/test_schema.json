@@ -1,6 +1,7 @@
 {
   "primitives" : {
-    "_description" : "this is the basic inputs",
+    "_title": "Primitives",
+    "_description" : "this is the description for the basic inputs",
     "boolean": "boolean",
     "string": "string",
     "email": "email",
@@ -41,8 +42,10 @@
   },
   "references" : {
     "one_to_one": "primitives",
-    "one_to_many": ["array"],
-    "one_to_many2": ["array"]
+    "one_to_one_array": "array",
+    "one_to_one_map": "map",
+    "one_to_many_array": ["array"],
+    "one_to_many_map" : {"_id": "map"}
   },
   "circular" : {
     "title": "string",
@@ -50,5 +53,10 @@
   },
   "array": [{
       "title": "string"
-  }]
+  }],
+  "map": {
+    "_id": {
+      "title": "string"
+    }
+  }
 }

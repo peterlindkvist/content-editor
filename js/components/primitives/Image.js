@@ -29,7 +29,7 @@ class Image extends Component {
       height: this.image.height
     }
     this.setState(dimension);
-    console.log("onLoad", this.image.width, this.imageContainer);
+
     this.imageContainer.style.width = null;
     this.imageContainer.style.height = null;
 
@@ -47,7 +47,7 @@ class Image extends Component {
   onDrop = (files) => {
     const file = files[0]
     const preview = file.preview;
-    console.log("onDrop", files[0]);
+
     const newState = {
       preview,
       name: file.name,
@@ -75,13 +75,13 @@ class Image extends Component {
 
     const attr = {
       floatingLabelFixed: true,
-      floatingLabelText: name,
+      floatingLabelText: 'Caption',
       id: path + '.caption',
       fullWidth: true,
       defaultValue: this.state.caption,
       onChange: this._handleChange.bind(this)
     }
-    
+
     return (
       <div>
         <Subheader>{label}</Subheader>
@@ -97,11 +97,11 @@ class Image extends Component {
           </div>
           <div className="image--metadata">
             <TextField {...attr}/>
-            <div>name : {this.state.name} </div>
-            <div>width : {this.state.width} px</div>
-            <div>height : {this.state.height} px</div>
-            <div>size : {this.state.size} bytes</div>
-            <div>type : {this.state.type} </div>
+            <div>Name : {this.state.name} </div>
+            <div>Width : {this.state.width} px</div>
+            <div>Height : {this.state.height} px</div>
+            <div>Size : {this.state.size} bytes</div>
+            <div>Type : {this.state.type} </div>
           </div>
         </div>
       </div>

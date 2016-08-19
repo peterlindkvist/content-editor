@@ -17,9 +17,10 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this._handleChange = this._handleChange.bind(this);
-    this._handleAddArrayItem = this._handleAddArrayItem.bind(this);
+    this._handleAddItem = this._handleAddItem.bind(this);
     this._handleRemoveItem = this._handleRemoveItem.bind(this);
     this._handleMoveItem = this._handleMoveItem.bind(this);
+    this._handleReplaceItem = this._handleReplaceItem.bind(this);
     this._handleNavigate = this._handleNavigate.bind(this);
     this._handleUpload = this._handleUpload.bind(this);
   }
@@ -35,16 +36,20 @@ class Main extends Component {
     this.props.dispatch(ContentActions.set(path, value));
   }
 
-  _handleAddArrayItem(path, itemType, isReference, index){
-    this.props.dispatch(ContentActions.addArrayItem(path, itemType, isReference, index));
+  _handleAddItem(path, itemType, index, isReference, isMap){
+    this.props.dispatch(ContentActions.addItem(path, itemType, index, isReference, isMap));
   }
 
   _handleRemoveItem(path, index){
-    this.props.dispatch(ContentActions.removeArrayItem(path, index));
+    this.props.dispatch(ContentActions.removeItem(path, index));
   }
 
   _handleMoveItem(path, fromIndex, toIndex){
     this.props.dispatch(ContentActions.moveArrayItem(path, fromIndex, toIndex));
+  }
+
+  _handleReplaceItem(path, itemType, index, isMap){
+    this.props.dispatch(ContentActions.replaceItem(path, itemType, index, isMap));
   }
 
   _handleNavigate(path){
@@ -60,8 +65,8 @@ class Main extends Component {
     if(data){
       if(path){
          return <EditorCard path={path} key={path} data={data} schema={schema}  title={titleCase(path)} expandable={false}
-          onChange={this._handleChange} onAddItem={this._handleAddArrayItem} onRemoveItem={this._handleRemoveItem}
-          onMoveItem={this._handleMoveItem} onUpload={this._handleUpload} />
+          onChange={this._handleChange} onAddItem={this._handleAddItem} onRemoveItem={this._handleRemoveItem}
+          onMoveItem={this._handleMoveItem} onReplaceItem={this._handleReplaceItem} onUpload={this._handleUpload} />
       } else {
         return <StartPage path={path} key={path} data={data} schema={schema}
         onClick={this._handleNavigate}/>

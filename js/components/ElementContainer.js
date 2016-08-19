@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {RaisedButton, FlatButton} from 'material-ui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import ItemArray from '../components/ItemArray';
+import Collection from '../components/Collection';
+import Reference from '../components/Reference';
 import PrimitiveElement from '../components/PrimitiveElement';
 import EditorCard from '../components/EditorCard';
 import * as EditorUtils from '../utils/EditorUtils';
@@ -14,77 +15,69 @@ class ElementContainer extends Component {
     path: PropTypes.string,
     data: PropTypes.object,
     schema: PropTypes.object,
+    changeable: PropTypes.bool,
     onChange: PropTypes.func,
-    onAddArrayItem: PropTypes.func,
+    onAddItem: PropTypes.func,
     onRemoveItem: PropTypes.func,
     onMoveItem: PropTypes.func,
+    onReplaceItem: PropTypes.func,
     expandable: PropTypes.bool,
     name: PropTypes.string,
     title: PropTypes.string,
-    movable: PropTypes.bool,
-    renderChildren: PropTypes.bool
   };
 
   static getDefaultProps =  {
-     movable: false,
-     renderChildren: false
+     changeable: true
   };
 
   render(){
-    const {name, path, renderChildren, fullpath, movable, data, schema,
-      onChange, onAddItem, onRemoveItem, onMoveItem, onUpload} = this.props;
+    const {name, path, renderChildren, fullpath, data, schema,
+      onChange, onAddItem, onRemoveItem, onMoveItem, onUpload, onReplaceItem} = this.props;
     const schemapath = EditorUtils.getSchemaPath(path);
     const value = _.get(data, path);
-    const type = _.get(schema, schemapath);
+    const node = _.get(schema, schemapath);
+    const type = EditorUtils.getType(node, value);
 
     //console.log("renderElement", path, value, type, typeof type, _.isArray(type), schemapath);
     const title = titleCase(name)
+    const changeable = this.props.changeable === undefined ? true : this.props.changeable
 
     const attr = {
       path: path,
       data: data,
       schema: schema,
       onAddItem: onAddItem,
+      onReplaceItem: onReplaceItem,
       onRemoveItem: onRemoveItem,
       onMoveItem: onMoveItem,
       onChange: onChange,
       onUpload: onUpload
     }
 
-    if(_.isArray(type)){
-      return (
-        <div>
-          <Subheader>{title}</Subheader>
-          <ItemArray {...attr} fullpath={fullpath} />
-        </div>
-      )
-    } else if(_.isObject(type)){
-      return (
-        <div>
-          <Subheader>{title}</Subheader>
-          <EditorCard {...attr} fullpath={fullpath + '.' + name} expandable={true} />
-        </div>
-      )
-    } else if(typeof type === 'string'){
-      if(EditorUtils.isPrimitive(type)){
+    switch(type){
+      case 'collection':
+        return (
+          <div>
+            <Subheader>{title}</Subheader>
+            <Collection {...attr} fullpath={fullpath}/>
+          </div>
+        )
+      case 'object':
+        return (
+          <div>
+            <Subheader>{title}</Subheader>
+            <EditorCard {...attr} fullpath={fullpath + '.' + name} expandable={true} />
+          </div>
+        )
+      case 'primitive':
         return <PrimitiveElement value={value} name={title} path={path}
-        type={type} onChange={onChange} onUpload={onUpload} />
-      } else if(value === undefined){
+          type={node} onChange={onChange} onUpload={onUpload} />
+      case 'missing':
         return <span> Missing value for {path}</span>
-      } else if(value[0] === '#'){
-        //check for missing types
-        const targetPath = value.substr(1)
-        const targetValue = _.get(data, targetPath);
-
-        if(targetPath !== undefined){
-          return <ElementContainer {...attr} name={name} path={targetPath}
-            fullpath={fullpath + '_' + targetPath} />
-        } else {
-          return ''
-        }
-      }
-    } else {
-
+      case 'reference':
+        return <Reference {...attr} name={name} changeable={changeable}/>
+      default:
+        return <span>Type error {type}, {value}</span>
     }
   }
 }

@@ -10,7 +10,7 @@ import Sortable from 'react-anything-sortable';
 import SortableWrapper from '../components/SortableWrapper';
 import 'react-anything-sortable/sortable.css';
 
-class ItemArray extends Component {
+class Collection extends Component {
   static propTypes = {
     onAddItem: PropTypes.func,
     onRemoveItem: PropTypes.func,
@@ -27,9 +27,9 @@ class ItemArray extends Component {
     addValue: -1
   }
 
-  _handleAddButton(path, type, isReference){
+  _handleAddButton(path, type, isReference, isMap){
     return function(){
-      this.props.onAddItem(path, type, isReference, this.state.addValue);
+      this.props.onAddItem(path, type, this.state.addValue, isReference, isMap);
     }.bind(this);
   }
 
@@ -43,13 +43,15 @@ class ItemArray extends Component {
     this.props.onMoveItem(this.props.path, currentDraggingSortData, currentDraggingIndex);
   }
 
-  _handleAddChange = (event, index, value) => this.setState({addValue: value});
+  _handleDropdownChange = (event, index, value) => this.setState({addValue: value});
 
   render () {
     const {data, schema, path, fullpath ,onAddItem, onMoveItem, onRemoveItem, onChange} = this.props;
     const _this = this;
     const value = _.get(data, path);
-    const type = _.get(schema, path)[0];
+    const schemaNode = _.get(schema, path);
+    const isMap = EditorUtils.isMap(schemaNode);
+    const type = schemaNode[isMap ? '_id': 0];
 
     const isReference = !(EditorUtils.isPrimitive(type) || _.isObject(type))
 
@@ -61,17 +63,19 @@ class ItemArray extends Component {
 
       return (
         <SortableWrapper key={fullpath + index} sortData={i}>
-          <div  className="item-array">
+          <div className="item-array">
             <div className="item-array--item">
               <ElementContainer path={path + index}
                 fullpath={fullpath + '.' + name + index} data={data} schema={schema}
                 onChange={onChange} onAddItem={onAddItem} onMoveItem={onRemoveItem}
-                onRemoveItem={onRemoveItem} renderChildren={true}/>
+                onRemoveItem={onRemoveItem} renderChildren={true} changeable={false}/>
             </div>
             <div className="item-array--actions">
-              <span className="item-array--dragitem">
-                <DragIcon/>
-              </span>
+              {(!isMap &&
+                <span className="item-array--dragitem">
+                  <DragIcon/>
+                </span>
+              )}
               <RemoveIcon onClick={this._handleRemoveButton(path, i).bind(this)}/>
             </div>
           </div>
@@ -93,17 +97,17 @@ class ItemArray extends Component {
         </Sortable>
         <div className="item-array--add">
           {isReference && (
-            <SelectField value={this.state.addValue} onChange={this._handleAddChange}>
+            <SelectField value={this.state.addValue} onChange={this._handleDropdownChange}>
               <MenuItem value={-1} primaryText={"New " + type} />
               {menuItems}
              </SelectField>
            )}
            <RaisedButton key={fullpath + '_add'} label={"Add item"} primary={true}
-            fullWidth={true} onClick={this._handleAddButton(path, type, isReference).bind(this)} />
+            fullWidth={true} onClick={this._handleAddButton(path, type, isReference, isMap).bind(this)} />
           </div>
        </div>
      )
   }
 }
 
-export default ItemArray;
+export default Collection;

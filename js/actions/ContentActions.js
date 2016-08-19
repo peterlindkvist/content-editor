@@ -42,7 +42,6 @@ function contentUploadDone(path, url){
   }
 }
 
-
 export function set(path, value){
   return {
     type: ActionTypes.CONTENT_UPDATE_VALUE,
@@ -51,19 +50,20 @@ export function set(path, value){
   }
 }
 
-export function addArrayItem(path, itemType, isReference, index){
+export function addItem(path, itemType, index, isReference, isMap){
   return {
-    type: ActionTypes.CONTENT_ADD_ARRAY_ITEM,
+    type: ActionTypes.CONTENT_ADD_ITEM,
     path,
     itemType,
     isReference,
+    isMap,
     index
   }
 }
 
-export function removeArrayItem(path, index){
+export function removeItem(path, index){
   return {
-    type: ActionTypes.CONTENT_REMOVE_ARRAY_ITEM,
+    type: ActionTypes.CONTENT_REMOVE_ITEM,
     path,
     index
   }
@@ -77,6 +77,17 @@ export function moveArrayItem(path, fromIndex, toIndex){
     toIndex
   }
 }
+
+export function replaceItem(path, itemType, index, isMap){
+  return {
+    type: ActionTypes.CONTENT_REPLACE_ITEM,
+    path,
+    itemType,
+    index,
+    isMap
+  }
+}
+
 
 export function error(message, error){
   alert('ERROR: ' + message + ' : ' + error);

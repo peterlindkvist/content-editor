@@ -3,7 +3,10 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var devFlagPlugin = new webpack.DefinePlugin({
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
+  'process.env': {
+     'NODE_ENV': JSON.stringify('production')
+  }
 });
 
 module.exports = {
@@ -13,12 +16,17 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/static/',
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
     devFlagPlugin,
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin('app.css')/*,
+    new webpack.optimize.UglifyJsPlugin({
+     compress:{
+       warnings: true
+     }
+   })*/
   ],
   module: {
     loaders: [

@@ -19,7 +19,12 @@ if (__DEV__) {
     persistState(window.location.href.match(/[?&]debug_session=([^&#]+)\b/))
   )(createStore);
 } else {
-  createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+  createStoreWithMiddleware = compose(
+    applyMiddleware(thunkMiddleware),
+    reduxReactRouter({
+       createHistory
+     })    
+  )(createStore);
 }
 
 const rootReducer = combineReducers({

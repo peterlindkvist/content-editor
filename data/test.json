@@ -55,8 +55,10 @@
   },
   "references" : {
     "one_to_one": "#primitives",
-    "one_to_many": ["#array[1]","#array[0]"],
-    "one_to_many2": ["#array[2]"]
+    "one_to_one_array": "#array[1]",
+    "one_to_one_map": "#map[first]",
+    "one_to_many_array": ["#array[1]","#array[0]"],
+    "one_to_many_map": {"second" : "#map[second]", "first": "#map[first]"}
   },
   "circular" : {
     "title": "string",
@@ -68,5 +70,16 @@
       "title": "array 2"
   },{
       "title": "array 3"
-  }]
+  }],
+  "map": {
+    "first": {
+      "title": "first map object"
+    },
+    "second": {
+      "title": "second map object"
+    },
+    "third": {
+      "title": "third map object"
+    }
+  }
 }

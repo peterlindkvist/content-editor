@@ -42,7 +42,7 @@ class Navigation extends Component {
   }
 
   render() {
-    const {title, data, drawer_open} = this.props;
+    const {title, data, drawer_open, schema} = this.props;
     const _this = this;
 
     return (
@@ -52,7 +52,7 @@ class Navigation extends Component {
           <List >
           { _.map(data, (obj, key) =>
             <div key={'list_' + key}>
-              {( _.isArray(obj) ?
+              {( _.isArray(obj) || EditorUtils.isMap(schema[key]) ?
                 <ListItem key={key} primaryText={titleCase(key)} initiallyOpen={false}
                 primaryTogglesNestedList={false} onTouchTap={this._handleClick('/' + key)}
                  nestedItems={
@@ -85,6 +85,7 @@ Navigation.childContextTypes = {
 const mapStateToProps = (state, ownProps) => {
   return {
     data: state.Content.data ? state.Content.data.toJS() : null,
+    schema: state.Content.schema,
     title: state.Sample.title,
     drawer_open: state.App.drawer_open,
   }
