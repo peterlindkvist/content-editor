@@ -50,7 +50,7 @@ class Navigation extends Component {
         <Drawer ref="leftNav" docked={false} width={200}
           open={drawer_open} onRequestChange={this._handleChange}>
           <List >
-          { _.map(data, (obj, key) =>
+          { _.map(schema, (obj, key) =>
             <div key={'list_' + key}>
               {( _.isArray(obj) || EditorUtils.isMap(schema[key]) ?
                 <ListItem key={key} primaryText={titleCase(key)} initiallyOpen={false}

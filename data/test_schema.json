@@ -51,6 +51,20 @@
     "title": "string",
     "children": "circular"
   },
+  "empty": {
+    "_description": "Test of creating datastructure from schema",
+    "title": "string",
+    "date": "datetime",
+    "children" : {
+      "title": "string",
+      "children" : {
+        "title": "string",
+        "children" : {
+          "title": "string"
+        }
+      }
+    }
+  },
   "array": [{
       "title": "string"
   }],

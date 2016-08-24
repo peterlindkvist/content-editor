@@ -15,14 +15,49 @@ export default function(state = defaultState, action) {
 
   switch (action.type) {
     case ActionTypes.CONTENT_UPDATED:
+
+      /*const d = {
+        a: "test",
+        c: {
+          cb: "test"
+        },
+        b : [
+          'a',
+          'b'
+        ]
+      }
+      const s = {
+        a : "string",
+        b : ["array"],
+        c : {
+          ca : "number",
+          cb : "image",
+          cc : {
+            cca : "boolean"
+          }
+        },
+        d : {
+          _id : 'map'
+        }
+      };
+
+      const out = EditorUtils.populateFromSchema(d, s);
+      console.log("test", d, s);
+
+      */
+
+      //prepopulate empty data
+      
+      const data = EditorUtils.populateFromSchema(action.data, action.schema);
+
+
       return {
         ...state,
-        data: Immutable.fromJS(action.data),
+        data: Immutable.fromJS(data),
         schema: action.schema
       };
 
     case ActionTypes.CONTENT_UPDATE_VALUE:
-      console.log("update", action.path, action.value)
       keyPath = EditorUtils.getImmutableKeyPath(action.path);
       newData = Immutable.fromJS(action.value);
       return {
@@ -34,8 +69,6 @@ export default function(state = defaultState, action) {
       let itemKeyPath = EditorUtils.getImmutableKeyPath(action.path)
       let newItem, newPath, imItem;
 
-
-
       if(action.isReference){
         let dataKeyPath = EditorUtils.getImmutableKeyPath(action.itemType)
 
@@ -43,7 +76,8 @@ export default function(state = defaultState, action) {
           const refSchema = action.itemType + (action.isMap ? '[_id]' : '[0]');
 
           //get new item to add and convert to immutable
-          newItem = Object.assign({}, _.get(state.schema, refSchema));
+          //newItem = Object.assign({}, _.get(state.schema, refSchema));
+          newItem = EditorUtils.getStubItem(_.get(state.schema, refSchema));
           imItem = Immutable.fromJS(newItem);
 
           //set an id for the map to add or index for array
@@ -71,7 +105,6 @@ export default function(state = defaultState, action) {
 
     case ActionTypes.CONTENT_REMOVE_ITEM:
       keyPath = EditorUtils.getImmutableKeyPath(action.path + '.' + action.index)
-      console.log("reducer remove", action.path, action.index, keyPath)
       newData = state.data.removeIn(keyPath);
 
       return {
@@ -102,7 +135,7 @@ export default function(state = defaultState, action) {
         const refSchema = action.itemType + (isMap ? '[_id]' : '[0]');
 
         //get new item to add and convert to immutable
-        newItem = Object.assign({}, _.get(state.schema, refSchema));
+        newItem = EditorUtils.getStubItem(_.get(state.schema, refSchema));
         imItem = Immutable.fromJS(newItem);
 
         //set an id for the map to add or index for array

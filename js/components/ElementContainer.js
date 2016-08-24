@@ -77,7 +77,7 @@ class ElementContainer extends Component {
       case 'reference':
         return <Reference {...attr} name={name} changeable={changeable}/>
       default:
-        return <span>Type error {type}, {value}</span>
+        return <span>Type error [{type}], {value}, {path}</span>
     }
   }
 }

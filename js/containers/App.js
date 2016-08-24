@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import configureStore from '../store/configureStore';
 import Main from '../containers/Main';
-//import DevTools from './DevTools';
+import DevTools from './DevTools';
 import * as ContentActions from '../actions/ContentActions';
 import mui from 'material-ui';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -26,7 +26,7 @@ export default React.createClass({
                 <Route path=":path" component={Main} />
               </Route>
             </ReduxRouter>
-
+            <DevTools />
           </div>
           </Provider>
       </MuiThemeProvider>
