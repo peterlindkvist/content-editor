@@ -1,8 +1,9 @@
 import titleCase from 'title-case';
 
+/* const with the posible primitives with there default values */ 
 const PRIMITIVES = {
   boolean : false,
-  string: 'test s',
+  string: '',
   text: '',
   number: 0,
   email: '',
@@ -28,31 +29,7 @@ export function isPrimitive(type){
   return Object.keys(PRIMITIVES).indexOf(type) !== -1
 }
 
-export function getStubItem(schemaNode){
-  const rawObj = Object.assign({}, schemaNode);
-  const defaultObj = _.cloneDeepWith(rawObj, (value, key, obj, stack) => {
-    //console.log("clone", value, key, obj, stack);
-    if(obj !== undefined && isMap(obj)){
-      return undefined;
-    } else if(_.isArray(obj)){
-      return undefined;
-    } else {
-      return PRIMITIVES[value];
-    }
-  });
-  return defaultObj;
-}
-
-//http://stackoverflow.com/questions/25333918/js-deep-map-function
-function transformDeep(obj, iterator, context) {
-    return _.transform(obj, function(result, val, key) {
-        result[key] = _.isObject(val) ?
-                            deepMap(val, iterator, context) :
-                            iterator.call(context, val, key, obj);
-    });
-}
-
-export function populateFromSchema(data, schema){
+export function populateFromSchema(schema, data){
   return  _.transform(schema, (result, val, key) => {
 
     if(result[key] === undefined){
@@ -61,7 +38,7 @@ export function populateFromSchema(data, schema){
       } else if(_.isArray(val)){
         result[key] = [];
       } else if(_.isObject(val)){
-        result[key] = populateFromSchema(result[key], val);
+        result[key] = populateFromSchema(val, result[key]);
       } else {
         result[key] = PRIMITIVES[val];
       }
@@ -145,5 +122,5 @@ export function getSchemaPath(path){
 }
 
 export function getImmutableKeyPath(path){
-  return path.replace(/\[([0-9]*)\]/g, '.$1').split('.');
+  return path.replace(/\[([0-9a-z]*)\]/g, '.$1').split('.');
 }

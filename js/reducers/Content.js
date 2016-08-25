@@ -47,8 +47,8 @@ export default function(state = defaultState, action) {
       */
 
       //prepopulate empty data
-      
-      const data = EditorUtils.populateFromSchema(action.data, action.schema);
+
+      const data = EditorUtils.populateFromSchema(action.schema, action.data);
 
 
       return {
@@ -77,7 +77,8 @@ export default function(state = defaultState, action) {
 
           //get new item to add and convert to immutable
           //newItem = Object.assign({}, _.get(state.schema, refSchema));
-          newItem = EditorUtils.getStubItem(_.get(state.schema, refSchema));
+          //newItem = EditorUtils.getStubItem(_.get(state.schema, refSchema));
+          newItem = EditorUtils.populateFromSchema(_.get(state.schema, refSchema));
           imItem = Immutable.fromJS(newItem);
 
           //set an id for the map to add or index for array
@@ -135,7 +136,7 @@ export default function(state = defaultState, action) {
         const refSchema = action.itemType + (isMap ? '[_id]' : '[0]');
 
         //get new item to add and convert to immutable
-        newItem = EditorUtils.getStubItem(_.get(state.schema, refSchema));
+        newItem = EditorUtils.populateFromSchema(_.get(state.schema, refSchema));
         imItem = Immutable.fromJS(newItem);
 
         //set an id for the map to add or index for array
