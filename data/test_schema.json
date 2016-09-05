@@ -65,8 +65,14 @@
       }
     }
   },
+  "polymorphic": {
+    "sections":["array", "array2"]
+  },
   "array": [{
       "title": "string"
+  }],
+  "array2": [{
+      "title2": "string"
   }],
   "map": {
     "_id": {
