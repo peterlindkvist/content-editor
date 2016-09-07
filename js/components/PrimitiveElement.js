@@ -18,36 +18,29 @@ class PrimitiveElement extends Component {
     name: PropTypes.string
   };
 
-  _handleChange(path, target=false){
-    return function(value) {
-      const val = target ? value.target.value : value;
-      this.props.onChange(path, val);
-    }.bind(this);
+  _handleChange = (path, target=false) => (value) => {
+    const val = target ? value.target.value : value;
+    this.props.onChange(path, val);
   }
 
-  _handleChangeBoolean(){
+  _handleChangeBoolean = () => {
     this.props.onChange(this.props.path, !this.props.value);
   }
 
-  _handleChangeDateTime(path, addType){
-    return function(value, date) {
-
-      if(addType !== undefined){
-        const prevValue = new Date(this.props.value);
-        if(addType === 'date'){
-          date = new Date(prevValue.toDateString() + ' ' + date.toTimeString());
-        } else if(addType === 'time'){
-          date = new Date(date.toDateString() + ' ' + prevValue.toTimeString());
-        }
+  _handleChangeDateTime = (path, addType) => (value, date) => {
+    if(addType !== undefined){
+      const prevValue = new Date(this.props.value);
+      if(addType === 'date'){
+        date = new Date(prevValue.toDateString() + ' ' + date.toTimeString());
+      } else if(addType === 'time'){
+        date = new Date(date.toDateString() + ' ' + prevValue.toTimeString());
       }
-      this.props.onChange(path, val);
-    }.bind(this);
+    }
+    this.props.onChange(path, date.toString());
   }
 
-  _handleUpload(path){
-    return function(files, subpath){
-      this.props.onUpload(path + subpath, files);
-    }.bind(this);
+  _handleUpload = (path) => (files, subpath) => {
+    this.props.onUpload(this.props.path + subpath, files);
   }
 
   render(){
@@ -83,26 +76,34 @@ class PrimitiveElement extends Component {
       case 'email':
       case 'password':
         return <TextField {...attr} type={type} />
+      case 'link':
+        return (
+          <div className='editor-twocol'>
+            <TextField floatingLabelFixed={true} value={value.url} fullWidth={true}
+            floatingLabelText={' Link Href'} onChange={this._handleChange(path + '.url', true)}/>
+            <TextField floatingLabelFixed={true} value={value.text} fullWidth={true}
+            floatingLabelText={' Link Text'} onChange={this._handleChange(path + '.text', true)}/>
+          </div>);
       case 'color':
-        return <div className="color">{name} :
+        return (<div className="color">{name} :
             <input type="color" value={value} onChange={this._handleChange(path, true)} />
             <input type="text" value={value} onChange={this._handleChange(path, true)} />
-          </div>
+          </div>)
       case 'html':
-        return <HTMLEditor key={path} value={value} onChange={this._handleChange(path).bind(this)}/>
+        return <HTMLEditor key={path} value={value} name={name} onChange={this._handleChange(path).bind(this)}/>
       case 'image':
         return <Image value={value} label={name} path={path}
-          onChange={onChange} onUpload={this._handleUpload(path)}/>
+          onChange={onChange} onUpload={this._handleUpload}/>
       case 'time':
         return <TimePicker {...dtAttr} format='24hr' />
       case 'date':
         return <DatePicker {...dtAttr} />
       case 'datetime':
-        return <div className='editor-datetime'>
+        return <div className='editor-twocol'>
           <DatePicker {...dtAttr} floatingLabelFixed={true}
-          floatingLabelText={' date'} onChange={this._handleChangeDateTime(path, 'time')}/>
+          floatingLabelText={' Date'} onChange={this._handleChangeDateTime(path, 'time')}/>
           <TimePicker {...dtAttr} floatingLabelFixed={true}
-          floatingLabelText={' time'} format='24hr' onChange={this._handleChangeDateTime(path, 'date')}/>
+          floatingLabelText={' Time'} format='24hr' onChange={this._handleChangeDateTime(path, 'date')}/>
         </div>
       default:
     }

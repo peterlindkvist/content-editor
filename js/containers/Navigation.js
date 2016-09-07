@@ -19,27 +19,16 @@ class Navigation extends Component {
     this._handleSave = this._handleSave.bind(this);
   }
 
-  _handleOpen(open) {
-    return function(evt){
-      this._handleChange(open)
-    }.bind(this);
+  _handleOpen = (open) => (evt) => this._handleChange(open);
+
+  _handleChange = (open) => this.props.dispatch(AppActions.showDrawer(open))
+
+  _handleClick = (path) => (evt) => {
+    this.props.dispatch(push({ pathname: path }));
+    this.props.dispatch(AppActions.showDrawer(false));
   }
 
-  _handleChange(open) {
-    this.props.dispatch(AppActions.showDrawer(open))
-  }
-
-  _handleClick(path) {
-    return function(evt){
-      this.props.dispatch(push({ pathname: path }));
-      this.props.dispatch(AppActions.showDrawer(false));
-
-    }.bind(this);
-  }
-
-  _handleSave(evt) {
-    this.props.dispatch(ContentActions.save());
-  }
+  _handleSave = (evt) => this.props.dispatch(ContentActions.save());
 
   render() {
     const {title, data, drawer_open, schema} = this.props;

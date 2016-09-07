@@ -1,10 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import RichTextEditor from 'react-rte';
+import Subheader from 'material-ui/Subheader';
 
 class HTMLEditor extends Component {
   static propTypes = {
     onChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
+    name: PropTypes.string
   };
 
   state = {
@@ -25,7 +27,10 @@ class HTMLEditor extends Component {
 
   render () {
     return (
-      <RichTextEditor value={this.state.value} onChange={this.onChange} />
+      <div>
+        <Subheader>{this.props.name}</Subheader>
+        <RichTextEditor value={this.state.value} onChange={this.onChange} />
+      </div>
     );
   }
 }

@@ -8,6 +8,7 @@
     "password": "password",
     "number": "number",
     "url": "url",
+    "link" : "link",
     "color": "color",
     "image": "image",
     "date": "date",
@@ -45,7 +46,8 @@
     "one_to_one_array": "array",
     "one_to_one_map": "map",
     "one_to_many_array": ["array"],
-    "one_to_many_map" : {"_id": "map"}
+    "one_to_many_map" : {"_id": "map"},
+    "one_to_many_list_of_maps" : ["map"]
   },
   "circular" : {
     "title": "string",

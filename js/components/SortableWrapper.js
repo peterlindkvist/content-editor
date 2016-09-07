@@ -6,7 +6,7 @@ export default React.createClass({
 
   render: function(){
     const { className, children } = this.props;
-    return this.renderWithSortable(  // <-- this.renderWithSortable call is essential
+    return this.renderWithSortable(
       <div className={className}>
         {children}
       </div>

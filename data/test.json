@@ -6,6 +6,10 @@
     "password": "123456",
     "number": 1,
     "url": "example.com",
+    "link": {
+      "url" : "http://example.com",
+      "text" : "example.com"
+    },
     "color": "#bada55",
     "image": {
       "url": "",
@@ -58,7 +62,8 @@
     "one_to_one_array": "#array[1]",
     "one_to_one_map": "#map[first]",
     "one_to_many_array": ["#array[1]","#array[0]"],
-    "one_to_many_map": {"second" : "#map[second]", "first": "#map[first]"}
+    "one_to_many_map": {"second" : "#map[second]", "first": "#map[first]"},
+    "one_to_many_list_of_maps" : ["#map[first]"]
   },
   "circular" : {
     "title": "string",

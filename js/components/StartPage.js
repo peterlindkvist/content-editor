@@ -17,12 +17,7 @@ class StartPage extends Component {
     onClick: PropTypes.func
   };
 
-  _handleClick(path) {
-    return function(evt){
-      this.props.onClick(path)
-    }.bind(this);
-  }
-
+  _handleClick = (path) => (evt) => this.props.onClick(path);
 
   render() {
     const {path, data, schema} = this.props;

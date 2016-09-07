@@ -1,6 +1,6 @@
 import titleCase from 'title-case';
 
-/* const with the posible primitives with there default values */ 
+/* const with the posible primitives with there default values */
 const PRIMITIVES = {
   boolean : false,
   string: '',
@@ -11,6 +11,10 @@ const PRIMITIVES = {
   url: '',
   color: '#ffffff',
   html: '',
+  link: {
+    url: '',
+    text: ''
+  },
   image: {
     url: undefined,
     caption: '',

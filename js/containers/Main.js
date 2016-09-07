@@ -9,7 +9,7 @@ import styles from '../../css/app.css';
 import EditorCard from '../components/EditorCard';
 import Navigation from '../containers/Navigation';
 import StartPage from '../components/StartPage';
-var titleCase = require('title-case');
+import titleCase from 'title-case';
 
 
 class Main extends Component {
@@ -35,8 +35,8 @@ class Main extends Component {
     this.props.dispatch(ContentActions.set(path, value));
   }
 
-  _handleAddItem(path, itemType, index, isReference, isMap){
-    this.props.dispatch(ContentActions.addItem(path, itemType, index, isReference, isMap));
+  _handleAddItem(path, itemType, index, isReference){
+    this.props.dispatch(ContentActions.addItem(path, itemType, index, isReference));
   }
 
   _handleRemoveItem(path, index){
@@ -47,8 +47,8 @@ class Main extends Component {
     this.props.dispatch(ContentActions.moveArrayItem(path, fromIndex, toIndex));
   }
 
-  _handleReplaceItem(path, itemType, index, isMap){
-    this.props.dispatch(ContentActions.replaceItem(path, itemType, index, isMap));
+  _handleReplaceItem(path, itemType, index){
+    this.props.dispatch(ContentActions.replaceItem(path, itemType, index));
   }
 
   _handleNavigate(path){

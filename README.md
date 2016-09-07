@@ -40,7 +40,7 @@ The corresponding content JSON:
 		tags:["JSON", "Editor"]
 	}
 
-### Primitives
+## Primitives
 The different input alternatives for editing of properties.
 
 |  Primitive | HTML equivalent            | Default value  | Note   |
@@ -52,6 +52,7 @@ The different input alternatives for editing of properties.
 |email       | `<input type=email />`     | ""             |
 |html        | `<RichTextEditor />`       | 0              | From [react-rte](https://react-rte.org)|
 |image       | `<input type="file" />`    | \[object\]     | See paragraph about image below
+|link        | `<input type=url + text />`| \[object\      | See paragraph about link below
 |number      | `<input type=number />`    | 0              |
 |password    | `<input type=password />`  | ""             | Nothing is encrypted so use with caution. |
 |string      | `<input type=text />`      | ""             |
@@ -61,9 +62,9 @@ The different input alternatives for editing of properties.
 
 
 #### Image
-The image datatype are a composed type and contains a file upload and a input for image caption. When an image are added the size, type and filename are added as properties to the object.
+The image datatype is a composed type and contains a file upload and a input for image caption. When an image are added the size, type and filename are added as properties to the object.
 
-The default values for an image are:
+The default values for an image is:
 
 	{
 		url: undefined,
@@ -74,12 +75,21 @@ The default values for an image are:
 	    size: 0,
 	    type: ''
 	}
+#### Link
+The link datatype is a composed type and contains a url input and a text input for the link text.
+
+The default values for a link is:
+
+	{
+		url: '',
+	    text: ''
+	}
 
 
-### Collections
+## Collections
 There are two types of collections, lists and maps. Think of them as the old javascript array `[]` and object `{}`.
 
-#### Lists
+### Lists
 Lists or Arrays are a collection of data where the order of the elements matter. Is defined in the admin schema as a simple JSON array
 
 	"tags": ["string"]
@@ -93,7 +103,7 @@ If it is a list of objects. The item are folded by default and needs to be expan
 		"webpage" : "url"
 	}]
 
-#### Maps
+### Maps
 In maps, also known as hashes or objects, the order of the items are not guarantied so the items can't be reordered. A map are defined as an object with only one key named `_id`.  In the admin schema a map of strings are  defined as:
 
 	"tags" : {
@@ -109,7 +119,7 @@ The corresponding content JSON might look like:
 
 The id for the property are randomized and can't be set. It's only used internally for relations, see below
 
-#### When to use List or Maps
+### When to use List or Maps
 
 TL;DR use maps.
 
@@ -119,9 +129,31 @@ In most cases the rendering of the page defines the order of elements to be rend
 
 To sort a map of persons in a alphabetical order.
 
-Lists are useful when the rendering order of items should be controlled in the editor. As with block order for website elements.
-
 References to nodes in a list are not changed if the order of the items in the collection changes or the list is modified. So `#user[0]`will always point to the first user in the list. Even if a new user is added to the top.
+
+Lists are useful when the rendering order of items should be controlled in the editor. As with block order for website elements. The best way to preserve the reference and be able to sort the collection is to use a list of map items.
+
+	{
+		"posts" : {
+			"tags" : ["tag"]
+		},
+		"tag" : {
+			"_id" : "string"
+		}
+	}
+
+The content JSON than becomes something like:
+
+	{
+		"posts" : {
+			"tags" : ["#tag[ozyt]", "#tag[prqw]"]
+		},
+		"tag" : {
+			"ozyt" : "JSON",
+			"prqw" : "Editor"
+		}
+	}
+
 
 ### Relations
 Relations between nodes are not possible by default in JSON. But some "hacks" of the JSON data makes it possible during parsing of the JSON into JS. Example:
@@ -218,12 +250,18 @@ To create a collection of items in a collection are defined in a similar way as 
 		authors :{
 			"_id:" : "person"
 		},
-		"categories" : ["category"]
+		"categories" : ["category"],
+		"tags" : ["tag"]
 	},
 	"person" : {
-		"name" : "string"
+		"_id" : "string"
 	},
-	"category" : ["string"]
+	"category" : ["string"],
+	"tag" : {
+		"_id" : "string"
+	}
+
+**Note** It's not possible to create a relationship of a map of list items.
 
 
 ### Modifications in references.
@@ -254,7 +292,7 @@ Adds a description on top of the admin for that node.
 - Add support for JSON as a primitive data type `"custom_data" : "json"` , a colored textarea whould be nice. Validation of the JSON is necessary.
 - Add support for exports to [CircularJSON](https://github.com/WebReflection/circular-json) and [Cycle.js](https://github.com/douglascrockford/JSON-js/blob/master/cycle.js)
 - add `_created_at` and `_updated_at`properties in JSON which are updated behind the scene with the correct values, as in ruby on rails.
-- Create relations between maps and lists.  
+- ~~Create relations between maps and lists. ~~ [Issue #6]
 
 
 

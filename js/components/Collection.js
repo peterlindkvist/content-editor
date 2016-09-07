@@ -27,9 +27,9 @@ class Collection extends Component {
     addValue: -1
   }
 
-  _handleAddButton(path, type, isReference, isMap){
+  _handleAddButton(path, type, isReference){
     return function(){
-      this.props.onAddItem(path, type, this.state.addValue, isReference, isMap);
+      this.props.onAddItem(path, type, this.state.addValue, isReference);
     }.bind(this);
   }
 
@@ -104,7 +104,7 @@ class Collection extends Component {
              </SelectField>
            )}
            <RaisedButton key={fullpath + '_add'} label={"Add item"} primary={true}
-             onClick={this._handleAddButton(path, type, isReference, isMap).bind(this)} />
+             onClick={this._handleAddButton(path, type, isReference).bind(this)} />
           </div>
        </div>
      )

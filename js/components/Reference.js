@@ -28,12 +28,9 @@ class Reference extends Component {
     addValue: -1
   }
 
-  _handleReplaceButton(path, newType, isReference, isMap){
-    return function(){
-      this.props.onReplaceItem(path, newType, this.state.addValue, isMap);
-    }.bind(this);
+  _handleReplaceButton = (path, newType, isReference) => () => {
+    this.props.onReplaceItem(path, newType, this.state.addValue);
   }
-
 
   _handleDropdownChange = (event, index, value) => this.setState({addValue: value});
 
@@ -68,7 +65,7 @@ class Reference extends Component {
               {menuItems}
              </SelectField>
              <RaisedButton key={fullpath + '_change'} label={"Change item"} primary={true}
-              onClick={this._handleReplaceButton(path, targetType, true, isMap).bind(this)} />
+              onClick={this._handleReplaceButton(path, targetType, true).bind(this)} />
           </div>
         )}
        </div>
