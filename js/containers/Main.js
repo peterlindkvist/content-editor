@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {push} from 'redux-router'
-import * as HomeActions from '../actions/HomeActions';
 import * as ContentActions from '../actions/ContentActions';
 import _ from 'lodash';
 import * as EditorUtils from '../utils/EditorUtils';
@@ -94,7 +93,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     data: state.Content.data ? state.Content.data.toJS() : null,
     schema: state.Content.schema,
-    title: state.Sample.title,
     path: ownProps.params.path,
     query:  ownProps.location.query
   }

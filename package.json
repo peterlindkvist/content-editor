@@ -2,14 +2,16 @@
   "name": "content-editor",
   "version": "0.1.0",
   "scripts": {
-    "start": "DEBUG=true node server.js",
-    "build": "webpack -p --config webpack.production.js",
-    "build-dev": "webpack -p"
+    "start": "DEBUG=true NODE_ENV=development node server.js",
+    "start-prod": "DEBUG=false NODE_ENV=production node server.js",
+    "build": "NODE_ENV=production webpack -p --config webpack.production.js",
+    "build-dev": "webpack -p",
+    "static-server": "./node_modules/static-server/bin/static-server.js -p 3000"
   },
   "dependencies": {
     "babel-core": "^6.3.15",
     "es6-promise": "^3.2.1",
-    "history": "^3.2.0",
+    "history": "^2.1.2",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.13.1",
@@ -50,12 +52,13 @@
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "path": "^0.12.7",
+    "redux-devtools": "^3.0.1",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.2",
+    "static-server": "^2.0.3",
     "style-loader": "^0.13.1",
     "webpack": "^1.0.0",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.10.0",
-    "redux-devtools": "^3.0.1",
-    "redux-devtools-dock-monitor": "^1.0.1",
-    "redux-devtools-log-monitor": "^1.0.2"
+    "webpack-hot-middleware": "^2.10.0"
   }
 }

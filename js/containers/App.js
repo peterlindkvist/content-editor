@@ -26,16 +26,12 @@ export default React.createClass({
                 <Route path=":path" component={Main} />
               </Route>
             </ReduxRouter>
-            <DevTools />
+            {__DEV__ &&
+              <DevTools />
+            }
           </div>
-          </Provider>
+        </Provider>
       </MuiThemeProvider>
     );
   }
 });
-
-/*
-{(false && __DEV__ &&
-    <DevTools />
-)}
-*/

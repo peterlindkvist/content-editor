@@ -50,6 +50,7 @@ class Collection extends Component {
     const _this = this;
     const value = _.get(data, path);
     const schemaNode = _.get(schema, path);
+    if(!schemaNode) return null;
     const isMap = EditorUtils.isMap(schemaNode);
     const type = schemaNode[isMap ? '_id': 0];
 
@@ -92,7 +93,7 @@ class Collection extends Component {
     return (
       <div>
         <Sortable onSort={this._handleSort.bind(this)} direction="vertical"
-        sortHandle="item-array--dragitem" dynamic>
+          sortHandle="item-array--dragitem" dynamic>
           {items}
         </Sortable>
         <div className="item-array--add">
@@ -103,7 +104,7 @@ class Collection extends Component {
              </SelectField>
            )}
            <RaisedButton key={fullpath + '_add'} label={"Add item"} primary={true}
-            fullWidth={true} onClick={this._handleAddButton(path, type, isReference, isMap).bind(this)} />
+             onClick={this._handleAddButton(path, type, isReference, isMap).bind(this)} />
           </div>
        </div>
      )

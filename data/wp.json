@@ -1,39 +1,75 @@
 {
   "options": {
-    "page_title": "string"
+    "page_title": "wp-ish"
   },
-  "post": [{
-    "title": "string",
-    "author": "user",
-    "pub_date": "datetime",
-    "mod_date": "datetime",
-    "content": "html",
-    "excerpt": "text",
-    "status": "status",
-    "parent": "post[0]",
-    "comments": ["comment"],
-    "tags": ["tag"],
-    "status": "status"
-  }],
-  "user": [{
-    "email": "email",
-    "name": "string"
-  }],
-  "status": ["draft", "published"],
-  "comment": [{
-    "post": "post",
-    "author": "user",
-    "date": "date",
-    "content": "html"
-  }],
-  "tag" :[{
-    "name": "string",
-    "description": "html"
-  }],
-  "category": [{
-    "name": "string",
-    "description": "html",
-    "parent": "category",
-    "childs": ["category"]
-  }]
+  "post": [
+    {
+      "excerpt": "text",
+      "parent": "#post[0]",
+      "author": "#user[0]",
+      "mod_date": "Thu Jun 30 2016 13:31:48 GMT+0200 (CEST)",
+      "pub_date": "Thu Jun 30 2016 13:31:48 GMT+0200 (CEST)",
+      "status": "#status[0]",
+      "comments": [
+        "#comment[0]"
+      ],
+      "title": "post 1",
+      "tags": [
+        "#tag[1]"
+      ],
+      "content": "This is a long \n multiline text"
+    },
+    {
+      "excerpt": "text",
+      "parent": "#post[0]",
+      "author": "#user[0]",
+      "mod_date": "Thu Jun 30 2016 13:31:48 GMT+0200 (CEST)",
+      "pub_date": "Thu Jun 30 2016 13:31:48 GMT+0200 (CEST)",
+      "status": "#status[0]",
+      "comments": [
+        "#comment[0]"
+      ],
+      "title": "post 2",
+      "tags": [
+        "#tag[0]"
+      ],
+      "content": "This is a long \n multiline text"
+    }
+  ],
+  "user": [
+    {
+      "email": "peter@superkrut.se",
+      "name": "Peter"
+    }
+  ],
+  "comment": [
+    {
+      "post": "#post[0]",
+      "title": "title",
+      "author": "#user[0]",
+      "date": "Sat Jul 02 2016 20:52:25 GMT+0200 (CEST)",
+      "content": "html"
+    }
+  ],
+  "tag": [
+    {
+      "name": "tag 1",
+      "description": "html"
+    },
+    {
+      "name": "tag 2",
+      "description": "html"
+    }
+  ],
+  "category": [
+    {
+      "name": "category 1",
+      "description": "html",
+      "parent": "category"
+    }
+  ],
+  "status": [
+    "draft",
+    "published"
+  ]
 }

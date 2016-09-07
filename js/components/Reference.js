@@ -68,7 +68,7 @@ class Reference extends Component {
               {menuItems}
              </SelectField>
              <RaisedButton key={fullpath + '_change'} label={"Change item"} primary={true}
-              fullWidth={true} onClick={this._handleReplaceButton(path, targetType, true, isMap).bind(this)} />
+              onClick={this._handleReplaceButton(path, targetType, true, isMap).bind(this)} />
           </div>
         )}
        </div>

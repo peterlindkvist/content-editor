@@ -56,7 +56,7 @@ class Navigation extends Component {
                 <ListItem key={key} primaryText={titleCase(key)} initiallyOpen={false}
                 primaryTogglesNestedList={false} onTouchTap={this._handleClick('/' + key)}
                  nestedItems={
-                   _.map(obj, (child, i) =>
+                   _.map(data[key], (child, i) =>
                      <ListItem key={key + i} primaryText={EditorUtils.getTitle(child)}
                      onTouchTap={_this._handleClick('/' + key + '[' + i + ']')}/>
                    )}
@@ -86,7 +86,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     data: state.Content.data ? state.Content.data.toJS() : null,
     schema: state.Content.schema,
-    title: state.Sample.title,
     drawer_open: state.App.drawer_open,
   }
 }

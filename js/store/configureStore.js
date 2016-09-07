@@ -8,7 +8,7 @@ import { createHistory } from 'history';
 
 let createStoreWithMiddleware;
 
-// Configure the dev tools when in DEV mode
+// Configure the dev tools when in DEV mode 
 if (__DEV__) {
   createStoreWithMiddleware = compose(
     applyMiddleware(thunkMiddleware),
@@ -23,7 +23,7 @@ if (__DEV__) {
     applyMiddleware(thunkMiddleware),
     reduxReactRouter({
        createHistory
-     })    
+     })
   )(createStore);
 }
 

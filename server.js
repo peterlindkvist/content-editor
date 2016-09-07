@@ -5,7 +5,7 @@ var config = require('./webpack.config');
 
 var app = express();
 
-console.log("debug ", process.env.DEBUG === 'true')
+console.log("debug ", process.env.NODE_ENV, process.env.DEBUG === 'true')
 if(process.env.DEBUG === 'true'){
   var compiler = webpack(config);
 

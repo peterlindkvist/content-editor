@@ -1,0 +1,39 @@
+{
+  "options": {
+    "page_title": "string"
+  },
+  "post": [{
+    "title": "string",
+    "author": "user",
+    "pub_date": "datetime",
+    "mod_date": "datetime",
+    "content": "html",
+    "excerpt": "text",
+    "status": "status",
+    "parent": "post",
+    "comments": ["comment"],
+    "tags": ["tag"],
+    "status": "status"
+  }],
+  "user": [{
+    "email": "email",
+    "name": "string"
+  }],
+  "status": ["string"],
+  "comment": [{
+    "post": "post",
+    "author": "user",
+    "date": "date",
+    "content": "html"
+  }],
+  "tag" :[{
+    "name": "string",
+    "description": "html"
+  }],
+  "category": [{
+    "name": "string",
+    "description": "html",
+    "parent": "category",
+    "childs": ["category"]
+  }]
+}

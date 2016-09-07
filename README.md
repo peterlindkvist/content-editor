@@ -3,10 +3,14 @@
 
 A client side editor for JSON data written in redux/react.
 
+### Examples
+[Wordress-ish](http://editor.tndr.io?content=/data/wp.json&schema=/data/wp_schema.json)
+[Test Admin](http://editor.tndr.io?content=/data/test.json&schema=/data/test_schema.json)
+
 ## Admin schema
  The editor uses a schema for defining properties in the JSON. The schema in NOT a  [JSON-schema](http://json-schema.org/ "JSON schema") but a admin schema in JSON.
 
-The admin schema has the same structure as the content JSON and defines the possible primitive data types together with relations between nodes.
+The admin schema has the same structure as the content JSON and defines the possible primitive data types together with relations between nodes.  
 
 #### Example
 
@@ -208,10 +212,39 @@ And the content JSON
 
 #### Collection of references to collections (Many-To-Many)
 
-To reference a
+To create a collection of items in a collection are defined in a similar way as other relations, but with the reference inside an list or an map .
 
-#### Deletions in references.
+	"post" : {
+		authors :{
+			"_id:" : "person"
+		},
+		"categories" : ["category"]
+	},
+	"person" : {
+		"name" : "string"
+	},
+	"category" : ["string"]
 
+
+### Modifications in references.
+
+If an item are added to a reference collection its added to the target collection as well. But if an item are deleted, only the reference are removed.
+
+## Special admin JSON properties
+
+All property names starting with a underscore `_` are internal or hidden properties. Internal reserved properties are:
+
+#### _id
+Used in  definitions of maps
+
+	{
+		"_id" : "string"
+	}
+
+Defines a map of strings.
+
+#### _description
+Adds a description on top of the admin for that node.
 
 ## Future roadmap
 
@@ -221,6 +254,7 @@ To reference a
 - Add support for JSON as a primitive data type `"custom_data" : "json"` , a colored textarea whould be nice. Validation of the JSON is necessary.
 - Add support for exports to [CircularJSON](https://github.com/WebReflection/circular-json) and [Cycle.js](https://github.com/douglascrockford/JSON-js/blob/master/cycle.js)
 - add `_created_at` and `_updated_at`properties in JSON which are updated behind the scene with the correct values, as in ruby on rails.
+- Create relations between maps and lists.  
 
 
 
